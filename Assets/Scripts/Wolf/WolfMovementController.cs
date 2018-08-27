@@ -3,15 +3,11 @@
 namespace Wolfpack
 {
     [RequireComponent(typeof(GlitchEffectController))]
-    [RequireComponent(typeof(PlayerInput))]
     public class WolfMovementController : MonoBehaviour
     {
         [Header("Movement Settings")] 
         [SerializeField] float movementVelocity = 20f;
         [SerializeField] float teleportDistance = 2.3f;
-
-        [Header("Other Settings")] 
-        [SerializeField] bool isPlayer = false;
 
         GlitchEffectController glitchEffectController;
         Animator animator;
@@ -26,11 +22,8 @@ namespace Wolfpack
         void Start()
         {
             GameManager.StateChanged += OnStateChanged;
-
-            if (isPlayer)
-                return;
-        
             glitchEffectController.GlitchEffectPlayed += TeleportWolf;
+            
             movementVelocity = Random.Range(12f, 16f);
             glitchEffectController.DefaultGlowIntensity = 3f - 1f / 6f * movementVelocity;
             animator.speed = 1f + 1f / 12f * movementVelocity;

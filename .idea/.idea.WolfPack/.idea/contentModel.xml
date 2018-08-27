@@ -685,6 +685,7 @@
           </e>
           <e p="Player" t="Include">
             <e p="HeadCameraRotationController.cs" t="Include" />
+            <e p="IControllerInput.cs" t="Include" />
             <e p="PlayerInput.cs" t="Include" />
             <e p="PlayerMovementController.cs" t="Include" />
           </e>

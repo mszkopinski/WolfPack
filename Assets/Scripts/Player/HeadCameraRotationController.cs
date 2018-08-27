@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
-    [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Animator))]
     public class HeadCameraRotationController : MonoBehaviour
     {
@@ -20,14 +20,16 @@ namespace Wolfpack
         [SerializeField] 
         float maxHorizontalLookRotation = 80f;
     
-        PlayerInput playerInput;
         Camera headCam;
         Animator animator;
+        IControllerInput input;
+
+        [Inject]
+        public void Initialize(IControllerInput controllerInput) { input = controllerInput; }
 
         void Awake()
         {
             headCam = Camera.main;
-            playerInput = GetComponent<PlayerInput>();
             animator = GetComponent<Animator>();
         
             Cursor.lockState = CursorLockMode.Locked;
@@ -36,9 +38,11 @@ namespace Wolfpack
 
         void Update()
         {
-            playerInput?.OnUpdate();
-        
-            RotateHead(playerInput.MouseX, playerInput.MouseY);
+            if (input == null)
+                return;
+            
+            input.OnUpdate();
+            RotateHead(input.MouseHorizontalAxis, input.MouseVerticalAxis);
         }
 
         void RotateHead(float mouseX, float mouseY)

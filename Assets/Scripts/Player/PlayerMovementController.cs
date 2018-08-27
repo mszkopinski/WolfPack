@@ -1,27 +1,32 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
-    [RequireComponent(typeof(PlayerInput))]
     public class PlayerMovementController : MonoBehaviour
     {
         [Header("Movement Settings")] 
         [SerializeField] float movementVelocity = 20f;
-    
-        PlayerInput playerInput;
+              
+        IControllerInput input;
         Animator animator;
+
+        [Inject]
+        public void Initialize(IControllerInput controllerInput) { input = controllerInput; }
 
         void Awake()
         {
             animator = GetComponent<Animator>();
-            playerInput = GetComponent<PlayerInput>();
         }
     
         void Update()
         {
-            playerInput?.OnUpdate();
-            animator.SetFloat("vertical", playerInput.VerticalAxis);
-            transform.position += playerInput.VerticalAxis * transform.forward * movementVelocity * Time.deltaTime;
+            if (input == null)
+                return;
+            
+            input.OnUpdate();
+            animator.SetFloat("vertical", input.VerticalAxis);
+            transform.position += input.VerticalAxis * transform.forward * movementVelocity * Time.deltaTime;
         }
     }
 }

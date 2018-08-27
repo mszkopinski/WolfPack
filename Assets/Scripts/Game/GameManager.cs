@@ -42,8 +42,7 @@ namespace Wolfpack
 
         public void SetGameState(GameState gameState)
         {
-            if (gameState == State)
-                return;
+            if (gameState == State) return;
             State = gameState;
             OnGameStateChanged(State);
         }
