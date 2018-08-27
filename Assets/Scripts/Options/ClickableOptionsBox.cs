@@ -33,8 +33,7 @@ namespace Wolfpack
             switch (Action)
             {
                 case GameLifecycleAction.StartGame:
-                    FadeInImage.Instance.Fade(FadeDirection.In, 1f);
-                    StartCoroutine(GameManager.Instance.Level.LoadLevelWithDelay(LevelName.Game.ToString(), 3f));
+                    GameManager.Instance.LoadGame();
                     break;
                 case GameLifecycleAction.ExitGame:
                     GameManager.Instance.Level.Quit();

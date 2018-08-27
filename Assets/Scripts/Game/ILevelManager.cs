@@ -9,6 +9,6 @@ namespace Wolfpack
         void LoadLevel(string levelName);
         IEnumerator LoadLevelWithDelay(string levelName, float delay);
         void Quit();
-        event Action<LevelName> LevelChanged;
+        event Action<string> LevelChanged;
     }
 }

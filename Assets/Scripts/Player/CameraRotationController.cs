@@ -4,7 +4,7 @@ using Zenject;
 namespace Wolfpack
 {
     [RequireComponent(typeof(Animator))]
-    public class HeadCameraRotationController : MonoBehaviour
+    public class CameraRotationController : MonoBehaviour
     {
         [Header("Rotation Settings")] 
         [SerializeField] 
@@ -20,15 +20,13 @@ namespace Wolfpack
         [SerializeField] 
         float maxHorizontalLookRotation = 80f;
     
-        Camera headCam;
-        IControllerInput input;
-
-        [Inject]
-        public void Initialize(IControllerInput controllerInput) { input = controllerInput; }
+        Camera _camera;
+        IInputController input;
 
         void Awake()
         {
-            headCam = Camera.main;
+            _camera = Camera.main;
+            input = GameManager.Instance.Input;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -39,14 +37,14 @@ namespace Wolfpack
                 return;
             
             input.OnUpdate();
-            RotateHead(input.MouseHorizontalAxis, input.MouseVerticalAxis);
+            RotateHead(input.MouseX, input.MouseY);
         }
 
         void RotateHead(float mouseX, float mouseY)
         {
             var rotationX = mouseY * verticalMouseSensitivity * Time.deltaTime;
             var rotationY = mouseX * horizontalMouseSensitivity * Time.deltaTime;
-            var targetHeadRotation = headCam.transform.rotation.eulerAngles;
+            var targetHeadRotation = _camera.transform.rotation.eulerAngles;
 
             var verticalRotation = isVerticallyInversed ? targetHeadRotation.x - rotationX : targetHeadRotation.x + rotationX;
             var horizontalRotation = isHorizontallyInversed ? targetHeadRotation.y - rotationY : targetHeadRotation.y + rotationY;
@@ -55,7 +53,6 @@ namespace Wolfpack
             targetHeadRotation.y = horizontalRotation;
             targetHeadRotation.z = 0f;
         
-            // clamp vertical rotation
             if (verticalRotation >= maxVerticalLookRotation && verticalRotation <= maxVerticalLookRotation + 30f)
             {
                 targetHeadRotation.x = maxVerticalLookRotation;
@@ -66,18 +63,17 @@ namespace Wolfpack
                 targetHeadRotation.x = 360f - maxVerticalLookRotation;
             }
         
-            // clamp horizontal rotation
-            if (horizontalRotation >= 90f + maxHorizontalLookRotation && horizontalRotation <= 90f + maxHorizontalLookRotation + 30f)
+            if (horizontalRotation >= 270f + maxHorizontalLookRotation && horizontalRotation <= 270f + maxHorizontalLookRotation + 30f)
             {
-                targetHeadRotation.y = 90f + maxHorizontalLookRotation;
+                targetHeadRotation.y = 270f + maxHorizontalLookRotation;
             }
-            else if (horizontalRotation <= 90f - maxHorizontalLookRotation &&
-                     horizontalRotation >= 90f - maxHorizontalLookRotation - 30f)
+            else if (horizontalRotation <= 270f - maxHorizontalLookRotation &&
+                     horizontalRotation >= 270f - maxHorizontalLookRotation - 30f)
             {
-                targetHeadRotation.y = 90f - maxHorizontalLookRotation;
+                targetHeadRotation.y = 270f - maxHorizontalLookRotation;
             }
         
-            headCam.transform.rotation = Quaternion.Euler(targetHeadRotation);
+            _camera.transform.rotation = Quaternion.Euler(targetHeadRotation);
         }
     }
 }

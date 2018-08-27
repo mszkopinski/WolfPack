@@ -7,20 +7,13 @@ namespace Wolfpack
 {
     public class LevelManager : ILevelManager
     {
+        public event Action<string> LevelChanged;
         public string CurrentLevelName => SceneManager.GetActiveScene().name;
-        public event Action<LevelName> LevelChanged;
 
-        void Awake()
+        public LevelManager()
         {
-            SceneManager.sceneLoaded += (arg0, mode) =>
-            {
-                var levelName = arg0.name.ToLower().Contains("game")
-                    ? LevelName.Game
-                    : arg0.name.ToLower().Contains("menu")
-                        ? LevelName.Menu
-                        : LevelName.Unknown;
-                LevelChanged?.Invoke(levelName);
-            };
+            SceneManager.sceneLoaded += (scene, mode) 
+                => LevelChanged?.Invoke(scene.name);
         }
 
         public void LoadLevel(string levelName)

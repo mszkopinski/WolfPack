@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Michal\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_WolfPack.1198208695.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Michal\repos\Unity\WolfPack" t="IncludeRecursive">
+    <e p="C:\Users\Michal\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_WolfPack.-2052123335.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Michal\Desktop\WolfPack" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -666,9 +666,12 @@
           </e>
           <e p="DependencyInjection" t="Include">
             <e p="DefaultInstaller.cs" t="Include" />
+            <e p="GlitchInstaller.cs" t="Include" />
           </e>
           <e p="Effects" t="Include">
-            <e p="GlitchEffectController.cs" t="Include" />
+            <e p="GlitchEffect.cs" t="Include" />
+            <e p="GlitchEffectSettings.cs" t="Include" />
+            <e p="IGlitchEffect.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
             <e p="CommonEnums.cs" t="Include" />
@@ -688,9 +691,9 @@
             <e p="ClickableOptionsBox.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
-            <e p="HeadCameraRotationController.cs" t="Include" />
-            <e p="IControllerInput.cs" t="Include" />
-            <e p="PlayerInput.cs" t="Include" />
+            <e p="CameraRotationController.cs" t="Include" />
+            <e p="IInputController.cs" t="Include" />
+            <e p="InputController.cs" t="Include" />
             <e p="PlayerMovementController.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
@@ -698,6 +701,7 @@
           </e>
           <e p="Utility" t="Include">
             <e p="AnimatorExtensions.cs" t="Include" />
+            <e p="AudioExtensions.cs" t="Include" />
             <e p="MaterialExtensions.cs" t="Include" />
             <e p="MonoSingleton.cs" t="Include" />
             <e p="TagExtensions.cs" t="Include" />

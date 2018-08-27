@@ -52,7 +52,6 @@ namespace Wolfpack
         void OnStatusChanged()
         {
             var status = GameManager.Instance.State.Status;
-            Debug.Log(status);
             
             if (status == GameStatus.Intro)
                 StartCoroutine(PlayIntroAnimation());

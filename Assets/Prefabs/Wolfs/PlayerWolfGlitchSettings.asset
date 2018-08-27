@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2ce7fd4f6f4d75b9ab92154aaa6c94, type: 3}
+  m_Name: PlayerWolfGlitchSettings
+  m_EditorClassIdentifier: 
+  IsGlitchAutomatic: 0
+  MinTimeBetweenGlitches: 0
+  MaxTimeBetweenGlitches: 0
+  MinGlitchAmount: 0.1
+  DefaultGlitchAmount: 70
+  MaxGlitchAmount: 2
+  MinHologramVelocity: 0.1
+  DefaultHologramVelocity: 0.1
+  MaxHologramVelocity: 2
+  MinGlowIntensity: 3
+  DefaultGlowIntensity: 3
+  MaxGlowIntensity: 4
+  GlitchEffectSounds:
+  - {fileID: 8300000, guid: c25acc55ccd87884392ffe4bf2a41d46, type: 3}
+  - {fileID: 8300000, guid: 424b1a6f9fbee5240bdec90918030895, type: 3}
+  - {fileID: 8300000, guid: 786945e3ff287cd44bbf0a7aece37b27, type: 3}
+  - {fileID: 8300000, guid: c73cb07cab20197428768b82a77e15d2, type: 3}
+  - {fileID: 8300000, guid: a8fa5e4b81142624a8a45e3529314260, type: 3}
+  - {fileID: 8300000, guid: cb0784d0577a71b4cbda7a017caec2e7, type: 3}

@@ -7,12 +7,14 @@ namespace Wolfpack
     {
         public IGameState State { get; private set; }
         public ILevelManager Level { get; private set; }
+        public IInputController Input { get; private set; }
 
         [Inject]
-        public void Initialize(IGameState gameState, ILevelManager levelManager)
+        public void Initialize(IGameState gameState, ILevelManager levelManager, IInputController inputController)
         {
             State = gameState;
             Level = levelManager;
+            Input = inputController;
         }
         
         void OnEnable()
@@ -24,14 +26,28 @@ namespace Wolfpack
         {
             FadeInImage.Instance.Fade(FadeDirection.Out, 10f);
             StartCoroutine(State.SetGameStatusWithDelay(GameStatus.Intro, .1f));
-            Level.LevelChanged += LevelManagerOnLevelChanged;
+            Level.LevelChanged += OnLevelChanged;
         }
 
-        void LevelManagerOnLevelChanged(LevelName levelName)
+        void Update()
         {
-            if (levelName != LevelName.Game) return;
-            FadeInImage.Instance.Fade(FadeDirection.Out, 5f);
-            State.SetGameStatus(GameStatus.Game);
+            if (UnityEngine.Input.GetKeyDown(KeyCode.K) && Level.CurrentLevelName != "Game")
+                Level.LoadLevel("Game");
+        }
+
+        public void LoadGame()
+        {
+            FadeInImage.Instance.Fade(FadeDirection.In, 1f);
+            StartCoroutine(Level.LoadLevelWithDelay("Game", 3f));
+        }
+
+        void OnLevelChanged(string levelName)
+        {
+            if (levelName == "Game")
+            {
+                State.SetGameStatus(GameStatus.Game);
+                FadeInImage.Instance.Fade(FadeDirection.Out, 5f);
+            }
         }
 
         void OnGUI()

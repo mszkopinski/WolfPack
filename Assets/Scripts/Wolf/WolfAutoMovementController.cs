@@ -1,32 +1,29 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace Wolfpack
 {
-    [RequireComponent(typeof(GlitchEffectController))]
+    [RequireComponent(typeof(Wolf))]
     public class WolfAutoMovementController : MonoBehaviour
     {
         [Header("Movement Settings")] 
         [SerializeField] float movementVelocity = 20f;
         [SerializeField] float teleportDistance = 2.3f;
 
-        GlitchEffectController glitchEffectController;
+        Wolf wolf;
         Animator animator;
         bool canMove = true;
 
         void Awake()
         {
             animator = GetComponent<Animator>();
-            glitchEffectController = GetComponent<GlitchEffectController>();
+            wolf = GetComponent<Wolf>();
         }
     
         void Start()
         {
             GameManager.Instance.State.StatusChanged += OnStatusChanged;
-            glitchEffectController.GlitchEffectPlayed += TeleportWolf;
-            
+            wolf.GlitchEffect.OnGlitch += TeleportWolf;
             movementVelocity = Random.Range(12f, 16f);
-            glitchEffectController.DefaultGlowIntensity = 3f - 1f / 6f * movementVelocity;
             animator.speed = 1f + 1f / 12f * movementVelocity;
         }
 

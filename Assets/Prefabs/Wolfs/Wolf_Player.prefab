@@ -50,7 +50,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046171484622492}
   m_Layer: 0
-  m_Name: Player_HeadCam
+  m_Name: CameraPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 114953834194988194}
   - component: {fileID: 114282128717858062}
   m_Layer: 8
-  m_Name: Camera_Game
+  m_Name: ThirdPersonCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -525,10 +525,9 @@ GameObject:
   - component: {fileID: 82235278127998396}
   - component: {fileID: 95608111921510154}
   - component: {fileID: 54743715477178788}
-  - component: {fileID: 114362592451223170}
   - component: {fileID: 114924854136941122}
-  - component: {fileID: 114720112192042296}
   - component: {fileID: 114333750450034856}
+  - component: {fileID: 114756432170351930}
   m_Layer: 0
   m_Name: Wolf_Player
   m_TagString: Wolf
@@ -1850,7 +1849,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1398307627361768}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 73.4, y: 0, z: -1}
+  m_LocalPosition: {x: 254, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4773958451579668}
@@ -2255,7 +2254,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 80
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2596,7 +2595,7 @@ MonoBehaviour:
   isHorizontallyInversed: 0
   maxVerticalLookRotation: 45
   maxHorizontalLookRotation: 45
---- !u!114 &114362592451223170
+--- !u!114 &114756432170351930
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2604,37 +2603,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1398307627361768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd89db1abaeb485b9c7c1c7a786ea060, type: 3}
+  m_Script: {fileID: 11500000, guid: 48407753eace46d2b0374b6433b6e9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementVelocity: 8
-  teleportDistance: 2.3
---- !u!114 &114720112192042296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1398307627361768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57c99be31c910a458807a5f40adcbf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glitchSounds:
-  - {fileID: 8300000, guid: c25acc55ccd87884392ffe4bf2a41d46, type: 3}
-  - {fileID: 8300000, guid: 424b1a6f9fbee5240bdec90918030895, type: 3}
-  - {fileID: 8300000, guid: 786945e3ff287cd44bbf0a7aece37b27, type: 3}
-  - {fileID: 8300000, guid: c73cb07cab20197428768b82a77e15d2, type: 3}
-  - {fileID: 8300000, guid: a8fa5e4b81142624a8a45e3529314260, type: 3}
-  - {fileID: 8300000, guid: cb0784d0577a71b4cbda7a017caec2e7, type: 3}
-  minTimeBetweenGlitches: 1
-  maxTimeBetweenGlitches: 3
-  minGlitchAmount: 0.1
-  maxGlitchAmount: 2
-  minHologramVelocity: 0.1
-  maxHologramVelocity: 2
-  minGlowIntensity: 3
-  maxGlowIntensity: 4
+  headCamera: {fileID: 20279442536111066}
+  maxMovementVelocity: 16
+  acceleration: 3
+  defaultMovementVelocity: 8
+  defaultAnimatorSpeed: 1
+  animatorSpeedMultiplier: 0.6
 --- !u!114 &114924854136941122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2646,7 +2623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25e24ce614491f4e99d1b5fcafc0ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wolfGrowlSound: {fileID: 8300000, guid: a412bdd1e3811a5428bf074e99d5c5f0, type: 3}
+  GlitchEffectSettings: {fileID: 11400000, guid: 981780b37b4e0c14ca1b8e2cdf5d9e95,
+    type: 2}
 --- !u!114 &114953834194988194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2691,7 +2669,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3368e7fd425f8344c94c27d0872d81c7, type: 2}
+  - {fileID: 2100000, guid: d0f2c91fbc6bb77488e82966ea79c815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2783,7 +2761,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3368e7fd425f8344c94c27d0872d81c7, type: 2}
+  - {fileID: 2100000, guid: d0f2c91fbc6bb77488e82966ea79c815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2875,7 +2853,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3368e7fd425f8344c94c27d0872d81c7, type: 2}
+  - {fileID: 2100000, guid: d0f2c91fbc6bb77488e82966ea79c815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2967,7 +2945,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3368e7fd425f8344c94c27d0872d81c7, type: 2}
+  - {fileID: 2100000, guid: d0f2c91fbc6bb77488e82966ea79c815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3059,7 +3037,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3368e7fd425f8344c94c27d0872d81c7, type: 2}
+  - {fileID: 2100000, guid: d0f2c91fbc6bb77488e82966ea79c815, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
