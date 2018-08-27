@@ -17,10 +17,10 @@ namespace Wolfpack
     
         void Start()
         {
-            GameManager.GameStateChanged += OnGameStateChanged;
+            GameManager.StateChanged += OnStateChanged;
         }
 
-        void OnGameStateChanged(GameState gameState)
+        void OnStateChanged(GameState gameState)
         {
             if (gameState == GameState.Menu)
                 StartCoroutine(FadeOut(.5f));

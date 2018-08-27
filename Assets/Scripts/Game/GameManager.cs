@@ -6,9 +6,18 @@ namespace Wolfpack
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        public static event Action<GameState> GameStateChanged;
-        public GameState CurrentState { get; private set; }
+        #region Dependency Injection
+        readonly ILevelManager levelManager;
 
+        public GameManager(ILevelManager levelManager)
+        {
+            this.levelManager = levelManager;
+        }
+        #endregion
+        
+        public static event Action<GameState> StateChanged;
+        public GameState State { get; private set; }
+   
         void OnEnable()
         {
             SetGameState(GameState.Unknown);
@@ -19,7 +28,7 @@ namespace Wolfpack
         {
             FadeInImage.Instance.Fade(FadeDirection.Out, 10f);
             StartCoroutine(SetGameStateWithDelay(GameState.Intro, .1f));
-            LevelManager.LevelChanged += LevelManagerOnLevelChanged;
+            levelManager.LevelChanged += LevelManagerOnLevelChanged;
         }
 
         void LevelManagerOnLevelChanged(LevelName levelName)
@@ -33,10 +42,10 @@ namespace Wolfpack
 
         public void SetGameState(GameState gameState)
         {
-            if (gameState == CurrentState)
+            if (gameState == State)
                 return;
-            CurrentState = gameState;
-            OnGameStateChanged(CurrentState);
+            State = gameState;
+            OnGameStateChanged(State);
         }
 
         IEnumerator SetGameStateWithDelay(GameState gameState, float delay)
@@ -47,15 +56,15 @@ namespace Wolfpack
     
         protected virtual void OnGameStateChanged(GameState gameState)
         {
-            GameStateChanged?.Invoke(CurrentState);   
+            StateChanged?.Invoke(State);   
         }
 
         void OnGUI()
         {
 #if UNITY_EDITOR
-            GUI.Label(new Rect(0, 0, 250, 25), $"State: {CurrentState.ToString()}");     
+            GUI.Label(new Rect(0, 0, 250, 25), $"State: {State.ToString()}");     
             GUI.Label(new Rect(0, 25, 250, 25), $"GameTime: {Mathf.RoundToInt(Time.timeSinceLevelLoad)}");
-            GUI.Label(new Rect(0, 50, 250, 25), $"Level: {LevelManager.CurrentLevelName}");
+            GUI.Label(new Rect(0, 50, 250, 25), $"Level: {levelManager.CurrentLevelName}");
 #endif
         }
     }

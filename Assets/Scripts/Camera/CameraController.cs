@@ -29,7 +29,7 @@ namespace Wolfpack
         void Start()
         {
             Wolf.WolfAppeared += SetTarget;
-            GameManager.GameStateChanged += OnGameStateChanged;
+            GameManager.StateChanged += OnStateChanged;
         }
 
         void SetTarget(Transform target)
@@ -47,7 +47,7 @@ namespace Wolfpack
                 controlledCamera.transform.LookAt(target);
         }
 
-        void OnGameStateChanged(GameState state)
+        void OnStateChanged(GameState state)
         {
             if (state == GameState.Intro)
                 StartCoroutine(PlayIntroAnimation());
@@ -56,8 +56,8 @@ namespace Wolfpack
         IEnumerator PlayIntroAnimation()
         {
             animator.Play("Camera@Intro");
-            yield return new WaitForSeconds(
-                animator.runtimeAnimatorController.animationClips.FirstOrDefault(clip => clip.name == "Camera@Intro").length);
+            yield return new WaitForSeconds(animator.runtimeAnimatorController.animationClips
+                .FirstOrDefault(clip => clip.name == "Camera@Intro").length);
             GameManager.Instance.SetGameState(GameState.Menu);
         }
     }

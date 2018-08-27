@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 namespace Wolfpack
 {
-    public class LevelManager : MonoSingleton<LevelManager>
+    public class LevelManager : ILevelManager
     {
-        public static event Action<LevelName> LevelChanged;
-        public static string CurrentLevelName => SceneManager.GetActiveScene().name;
+        public string CurrentLevelName => SceneManager.GetActiveScene().name;
+        public event Action<LevelName> LevelChanged;
 
         void Awake()
         {
@@ -19,39 +19,28 @@ namespace Wolfpack
                     : arg0.name.ToLower().Contains("menu")
                         ? LevelName.Menu
                         : LevelName.Unknown;
-
                 LevelChanged?.Invoke(levelName);
             };
         }
 
-        void OnEnable()
+        public void LoadLevel(string levelName)
         {
-            DontDestroyOnLoad(this);
+            SceneManager.LoadScene(levelName);
         }
-    
+
+        public IEnumerator LoadLevelWithDelay(string levelName, float delayInS)
+        {
+            yield return new WaitForSeconds(delayInS);
+            SceneManager.LoadScene(levelName);
+        }
+
         public void Quit()
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+            Application.Quit();
 #endif
-        }
-
-        public void Load(string levelName)
-        {
-            SceneManager.LoadScene(levelName);
-        }
-
-        public void LoadWithDelay(string levelName, float delayInS)
-        {
-            StartCoroutine(LoadWithDelayCoroutine(levelName, delayInS));
-        }
-
-        IEnumerator LoadWithDelayCoroutine(string levelName, float delayInS)
-        {
-            yield return new WaitForSeconds(delayInS);
-            SceneManager.LoadScene(levelName);
         }
     }
 }

@@ -3,6 +3,40 @@ guid: b40fe4096cba629419f90a3ad07446d5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: BridgeLight
+    100002: BridgeSupport
+    100004: Bridgewall
+    100006: //RootNode
+    100008: Walkway
+    100010: Windows
+    400000: BridgeLight
+    400002: BridgeSupport
+    400004: Bridgewall
+    400006: //RootNode
+    400008: Walkway
+    400010: Windows
+    2100000: BridgeLightMat
+    2100002: BridgeSupportMat__BridgeSupport_AO
+    2100004: WalkWayMat
+    2100006: WindowsMat
+    2100008: BridgeWallMat__BridgeWall_AO
+    2300000: BridgeLight
+    2300002: BridgeSupport
+    2300004: Bridgewall
+    2300006: Walkway
+    2300008: Windows
+    3300000: BridgeLight
+    3300002: BridgeSupport
+    3300004: Bridgewall
+    3300006: Walkway
+    3300008: Windows
+    4300000: BridgeLight
+    4300002: BridgeSupport
+    4300004: Walkway
+    4300006: Windows
+    4300008: Bridgewall
+    7400000: Default Take
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -56,7 +90,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

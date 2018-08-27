@@ -25,7 +25,7 @@ namespace Wolfpack
     
         void Start()
         {
-            GameManager.GameStateChanged += OnGameStateChanged;
+            GameManager.StateChanged += OnStateChanged;
 
             if (isPlayer)
                 return;
@@ -59,7 +59,7 @@ namespace Wolfpack
                 : distance;
         }
 
-        void OnGameStateChanged(GameState gameState)
+        void OnStateChanged(GameState gameState)
         {
             if (gameState == GameState.Game)
                 canMove = true;

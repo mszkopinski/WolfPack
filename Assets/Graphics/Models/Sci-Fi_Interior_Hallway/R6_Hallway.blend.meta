@@ -3,6 +3,76 @@ guid: aafcdc873d9b0084c9872591de1dfd44
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: Base
+    100002: Pipes
+    100004: Pipes_001
+    100006: Pipes_002
+    100008: Pipes_003
+    100010: Pipes_004
+    100012: Pipes_005
+    100014: Pipes_006
+    100016: Pipes_007
+    100018: //RootNode
+    100020: SideFences
+    100022: UCX_R6_Hallway
+    100024: WalkBridge
+    400000: Base
+    400002: Pipes
+    400004: Pipes_001
+    400006: Pipes_002
+    400008: Pipes_003
+    400010: Pipes_004
+    400012: Pipes_005
+    400014: Pipes_006
+    400016: Pipes_007
+    400018: //RootNode
+    400020: SideFences
+    400022: UCX_R6_Hallway
+    400024: WalkBridge
+    2100000: unnamed
+    2100002: Pipes
+    2100004: Pipes__Untitled
+    2100006: Walkplate
+    2100008: SideFence
+    2100010: BaseCorridor
+    2300000: Base
+    2300002: Pipes
+    2300004: Pipes_001
+    2300006: Pipes_002
+    2300008: Pipes_003
+    2300010: Pipes_004
+    2300012: Pipes_005
+    2300014: Pipes_006
+    2300016: Pipes_007
+    2300018: SideFences
+    2300020: UCX_R6_Hallway
+    2300022: WalkBridge
+    3300000: Base
+    3300002: Pipes
+    3300004: Pipes_001
+    3300006: Pipes_002
+    3300008: Pipes_003
+    3300010: Pipes_004
+    3300012: Pipes_005
+    3300014: Pipes_006
+    3300016: Pipes_007
+    3300018: SideFences
+    3300020: UCX_R6_Hallway
+    3300022: WalkBridge
+    4300000: UCX_R6_Hallway
+    4300002: Pipes_007
+    4300004: Pipes_006
+    4300006: Pipes_005
+    4300008: Pipes_004
+    4300010: Pipes_003
+    4300012: Pipes_002
+    4300014: Pipes_001
+    4300016: Pipes
+    4300018: WalkBridge
+    4300020: SideFences
+    4300022: Base
+    7400000: Default Take
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -56,7 +126,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

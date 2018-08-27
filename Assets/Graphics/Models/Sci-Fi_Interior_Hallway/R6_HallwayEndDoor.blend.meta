@@ -3,6 +3,82 @@ guid: bead6d54a528bf849aff0a0bd4bdb93a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: Base
+    100002: Base_001
+    100004: Pipes
+    100006: Pipes_001
+    100008: Pipes_002
+    100010: Pipes_003
+    100012: Pipes_004
+    100014: Pipes_005
+    100016: Pipes_006
+    100018: Pipes_007
+    100020: //RootNode
+    100022: SideFences
+    100024: UCX_R6_Hallway
+    100026: WalkBridge
+    400000: Base
+    400002: Base_001
+    400004: Pipes
+    400006: Pipes_001
+    400008: Pipes_002
+    400010: Pipes_003
+    400012: Pipes_004
+    400014: Pipes_005
+    400016: Pipes_006
+    400018: Pipes_007
+    400020: //RootNode
+    400022: SideFences
+    400024: UCX_R6_Hallway
+    400026: WalkBridge
+    2100000: BaseCorridor__R6_HallwayEnd_AO
+    2100002: unnamed
+    2100004: Pipes
+    2100006: Pipes__Untitled
+    2100008: Walkplate
+    2100010: SideFence
+    2100012: BaseCorridor__R6_Base_AO
+    2300000: Base
+    2300002: Base_001
+    2300004: Pipes
+    2300006: Pipes_001
+    2300008: Pipes_002
+    2300010: Pipes_003
+    2300012: Pipes_004
+    2300014: Pipes_005
+    2300016: Pipes_006
+    2300018: Pipes_007
+    2300020: SideFences
+    2300022: UCX_R6_Hallway
+    2300024: WalkBridge
+    3300000: Base
+    3300002: Base_001
+    3300004: Pipes
+    3300006: Pipes_001
+    3300008: Pipes_002
+    3300010: Pipes_003
+    3300012: Pipes_004
+    3300014: Pipes_005
+    3300016: Pipes_006
+    3300018: Pipes_007
+    3300020: SideFences
+    3300022: UCX_R6_Hallway
+    3300024: WalkBridge
+    4300000: Base_001
+    4300002: UCX_R6_Hallway
+    4300004: Pipes_007
+    4300006: Pipes_006
+    4300008: Pipes_005
+    4300010: Pipes_004
+    4300012: Pipes_003
+    4300014: Pipes_002
+    4300016: Pipes_001
+    4300018: Pipes
+    4300020: WalkBridge
+    4300022: SideFences
+    4300024: Base
+    7400000: Default Take
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -56,7 +132,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
