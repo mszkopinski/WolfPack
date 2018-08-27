@@ -11,7 +11,7 @@ namespace Wolfpack
                 AnimationClip first = null;
                 foreach (var clip in animator.runtimeAnimatorController.animationClips)
                 {
-                    if (clip.name == "Camera@Intro")
+                    if (clip.name == clipName)
                     {
                         first = clip;
                         break;
