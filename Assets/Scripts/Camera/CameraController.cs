@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
@@ -19,7 +21,8 @@ namespace Wolfpack
         Animator animator;
         Vector3 velocity = Vector3.zero;
         Camera controlledCamera;
-
+        [Inject] IGameState gameState;
+        
         void Awake()
         {
             controlledCamera = Camera.main;
@@ -29,7 +32,7 @@ namespace Wolfpack
         void Start()
         {
             Wolf.WolfAppeared += SetTarget;
-            GameManager.StateChanged += OnStateChanged;
+            gameState.StateChanged += OnStateChanged;
         }
 
         void SetTarget(Transform target)
@@ -47,18 +50,20 @@ namespace Wolfpack
                 controlledCamera.transform.LookAt(target);
         }
 
-        void OnStateChanged(GameState state)
+        void OnStateChanged()
         {
-            if (state == GameState.Intro)
+            var status = gameState.Value.Status;
+            Debug.Log(status);
+            
+            if (status == GameStatus.Intro)
                 StartCoroutine(PlayIntroAnimation());
         }
 
         IEnumerator PlayIntroAnimation()
         {
             animator.Play("Camera@Intro");
-            yield return new WaitForSeconds(animator.runtimeAnimatorController.animationClips
-                .FirstOrDefault(clip => clip.name == "Camera@Intro").length);
-            GameManager.Instance.SetGameState(GameState.Menu);
+            yield return new WaitForSeconds(animator.GetClipLength("Camera@Intro"));
+            gameState.SetGameStatus(GameStatus.Menu);
         }
     }
 }

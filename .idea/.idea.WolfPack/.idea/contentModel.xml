@@ -675,6 +675,11 @@
             <e p="GameManager.cs" t="Include" />
             <e p="ILevelManager.cs" t="Include" />
             <e p="LevelManager.cs" t="Include" />
+            <e p="State" t="Include">
+              <e p="GameState.cs" t="Include" />
+              <e p="GameStateData.cs" t="Include" />
+              <e p="IGameState.cs" t="Include" />
+            </e>
           </e>
           <e p="Objects" t="Include">
             <e p="HallwayEmissionController.cs" t="Include" />
@@ -694,13 +699,14 @@
             <e p="TitleText.cs" t="Include" />
           </e>
           <e p="Utility" t="Include">
+            <e p="AnimatorExtensions.cs" t="Include" />
             <e p="MaterialExtensions.cs" t="Include" />
             <e p="MonoSingleton.cs" t="Include" />
             <e p="TagExtensions.cs" t="Include" />
           </e>
           <e p="Wolf" t="Include">
+            <e p="AIWolfMovementController.cs" t="Include" />
             <e p="Wolf.cs" t="Include" />
-            <e p="WolfMovementController.cs" t="Include" />
             <e p="WolfSpawner.cs" t="Include" />
           </e>
         </e>

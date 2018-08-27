@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
@@ -8,6 +9,7 @@ namespace Wolfpack
     {
         Animator animator;
         TextMeshProUGUI text;
+        [Inject] GameState gameState;
 
         void Awake()
         {
@@ -17,12 +19,15 @@ namespace Wolfpack
     
         void Start()
         {
-            GameManager.StateChanged += OnStateChanged;
+            gameState.StateChanged += OnStateChanged;
         }
 
-        void OnStateChanged(GameState gameState)
+        void OnStateChanged()
         {
-            if (gameState == GameState.Menu)
+            var status = gameState.Value.Status;
+            Debug.Log(status);
+            
+            if (status == GameStatus.Menu)
                 StartCoroutine(FadeOut(.5f));
         }
     

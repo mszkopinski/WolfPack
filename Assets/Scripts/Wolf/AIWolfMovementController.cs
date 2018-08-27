@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
     [RequireComponent(typeof(GlitchEffectController))]
-    public class WolfMovementController : MonoBehaviour
+    public class AIWolfMovementController : MonoBehaviour
     {
         [Header("Movement Settings")] 
         [SerializeField] float movementVelocity = 20f;
         [SerializeField] float teleportDistance = 2.3f;
 
+        [Inject] GameState gameState;
         GlitchEffectController glitchEffectController;
         Animator animator;
         bool canMove = true;
@@ -21,7 +23,7 @@ namespace Wolfpack
     
         void Start()
         {
-            GameManager.StateChanged += OnStateChanged;
+            gameState.StateChanged += OnStateChanged;
             glitchEffectController.GlitchEffectPlayed += TeleportWolf;
             
             movementVelocity = Random.Range(12f, 16f);
@@ -38,7 +40,7 @@ namespace Wolfpack
 
         float GetRandomTeleportDistance(float currentZ)
         {
-            float distance;
+            float distance; 
             var randomNumber = Random.Range(0, 10);
             if (randomNumber <= 2)
                 distance = teleportDistance;
@@ -51,10 +53,13 @@ namespace Wolfpack
                 ? GetRandomTeleportDistance(currentZ)
                 : distance;
         }
-
-        void OnStateChanged(GameState gameState)
+        
+        void OnStateChanged()
         {
-            if (gameState == GameState.Game)
+            var status = gameState.Value.Status;
+            Debug.Log(status);
+
+            if (status == GameStatus.Game)
                 canMove = true;
         }
 

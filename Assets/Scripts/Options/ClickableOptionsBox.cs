@@ -6,11 +6,13 @@ namespace Wolfpack
     public class ClickableOptionsBox : MonoBehaviour
     {
         #region Dependency Injection 
-        
+
+        readonly IGameState gameState;
         readonly ILevelManager levelManager;
 
-        public ClickableOptionsBox(ILevelManager levelManager)
+        public ClickableOptionsBox(IGameState gameState, ILevelManager levelManager)
         {
+            this.gameState = gameState;
             this.levelManager = levelManager;
         }
 
@@ -23,6 +25,7 @@ namespace Wolfpack
         Vector4 defaultTiling;
         float defaultHologramVelocity;
         float defaultGlowIntensity;
+        bool IsMenuLoaded => gameState.Value.Status == GameStatus.Menu;
 
         void Awake()
         {
@@ -37,8 +40,7 @@ namespace Wolfpack
 
         void OnMouseDown()
         {
-            if (GameManager.Instance.State != GameState.Menu)
-                return;
+            if (!IsMenuLoaded) return;
         
             switch (Action)
             {
@@ -54,7 +56,8 @@ namespace Wolfpack
 
         void OnMouseEnter()
         {
-            if (GameManager.Instance.State != GameState.Menu) return;
+            if (!IsMenuLoaded) return;
+            
             audioSource.Play();
             var mat = materials[0];
             mat.SetVector("_Hologram_Texture_Tiling", new Vector4(0f, 20f, 0f, 0f));
@@ -64,7 +67,8 @@ namespace Wolfpack
 
         void OnMouseExit()
         {
-            if (GameManager.Instance.State != GameState.Menu) return;
+            if (!IsMenuLoaded) return;
+            
             audioSource.Stop();
             var mat = materials[0];
             mat.SetVector("_Hologram_Texture_Tiling", defaultTiling);
