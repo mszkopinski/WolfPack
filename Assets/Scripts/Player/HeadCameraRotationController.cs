@@ -21,7 +21,6 @@ namespace Wolfpack
         float maxHorizontalLookRotation = 80f;
     
         Camera headCam;
-        Animator animator;
         IControllerInput input;
 
         [Inject]
@@ -30,8 +29,6 @@ namespace Wolfpack
         void Awake()
         {
             headCam = Camera.main;
-            animator = GetComponent<Animator>();
-        
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

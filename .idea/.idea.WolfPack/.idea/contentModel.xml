@@ -665,7 +665,7 @@
             <e p="CameraController.cs" t="Include" />
           </e>
           <e p="DependencyInjection" t="Include">
-            <e p="IOCContainer.cs" t="Include" />
+            <e p="DefaultInstaller.cs" t="Include" />
           </e>
           <e p="Effects" t="Include">
             <e p="GlitchEffectController.cs" t="Include" />
@@ -677,7 +677,6 @@
             <e p="LevelManager.cs" t="Include" />
             <e p="State" t="Include">
               <e p="GameState.cs" t="Include" />
-              <e p="GameStateData.cs" t="Include" />
               <e p="IGameState.cs" t="Include" />
             </e>
           </e>
@@ -696,7 +695,6 @@
           </e>
           <e p="UI" t="Include">
             <e p="FadeInImage.cs" t="Include" />
-            <e p="TitleText.cs" t="Include" />
           </e>
           <e p="Utility" t="Include">
             <e p="AnimatorExtensions.cs" t="Include" />
@@ -705,8 +703,8 @@
             <e p="TagExtensions.cs" t="Include" />
           </e>
           <e p="Wolf" t="Include">
-            <e p="AIWolfMovementController.cs" t="Include" />
             <e p="Wolf.cs" t="Include" />
+            <e p="WolfAutoMovementController.cs" t="Include" />
             <e p="WolfSpawner.cs" t="Include" />
           </e>
         </e>

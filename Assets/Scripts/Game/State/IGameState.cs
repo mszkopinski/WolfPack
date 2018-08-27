@@ -5,8 +5,8 @@ namespace Wolfpack
 {
     public interface IGameState
     {
-        GameStateData Value { get; }
-        event Action StateChanged;
+        GameStatus Status { get; }
+        event Action StatusChanged;
         void SetGameStatus(GameStatus gameStatus);
         IEnumerator SetGameStatusWithDelay(GameStatus gameStatus, float delayInS);
     }

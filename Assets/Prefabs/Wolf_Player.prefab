@@ -525,7 +525,6 @@ GameObject:
   - component: {fileID: 82235278127998396}
   - component: {fileID: 95608111921510154}
   - component: {fileID: 54743715477178788}
-  - component: {fileID: 114893266392192456}
   - component: {fileID: 114362592451223170}
   - component: {fileID: 114924854136941122}
   - component: {fileID: 114720112192042296}
@@ -2610,7 +2609,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 8
   teleportDistance: 2.3
-  isPlayer: 1
 --- !u!114 &114720112192042296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2637,20 +2635,6 @@ MonoBehaviour:
   maxHologramVelocity: 2
   minGlowIntensity: 3
   maxGlowIntensity: 4
-  wolfMesh: {fileID: 1688033554432990}
-  humanMesh: {fileID: 0}
-  transformChancesInPercent: 60
---- !u!114 &114893266392192456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1398307627361768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f8c409e82b7c142b9de17ff6674448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114924854136941122
 MonoBehaviour:
   m_ObjectHideFlags: 1

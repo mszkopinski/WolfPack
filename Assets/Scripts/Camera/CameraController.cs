@@ -21,7 +21,6 @@ namespace Wolfpack
         Animator animator;
         Vector3 velocity = Vector3.zero;
         Camera controlledCamera;
-        [Inject] IGameState gameState;
         
         void Awake()
         {
@@ -32,7 +31,7 @@ namespace Wolfpack
         void Start()
         {
             Wolf.WolfAppeared += SetTarget;
-            gameState.StateChanged += OnStateChanged;
+            GameManager.Instance.State.StatusChanged += OnStatusChanged;
         }
 
         void SetTarget(Transform target)
@@ -50,9 +49,9 @@ namespace Wolfpack
                 controlledCamera.transform.LookAt(target);
         }
 
-        void OnStateChanged()
+        void OnStatusChanged()
         {
-            var status = gameState.Value.Status;
+            var status = GameManager.Instance.State.Status;
             Debug.Log(status);
             
             if (status == GameStatus.Intro)
@@ -63,7 +62,7 @@ namespace Wolfpack
         {
             animator.Play("Camera@Intro");
             yield return new WaitForSeconds(animator.GetClipLength("Camera@Intro"));
-            gameState.SetGameStatus(GameStatus.Menu);
+            GameManager.Instance.State.SetGameStatus(GameStatus.Menu);
         }
     }
 }

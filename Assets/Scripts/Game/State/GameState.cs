@@ -6,20 +6,19 @@ namespace Wolfpack
 {   
     public class GameState : IGameState
     {
-        public GameStateData Value { get; private set; }
-        public event Action StateChanged;
+        public GameStatus Status { get; private set; }
+        public event Action StatusChanged;
 
-        public GameState(GameStateData stateData)
+        public GameState()
         {
-            Value = GameStateData.Default;
+            Status = GameStatus.Unknown;
         }
 
         public void SetGameStatus(GameStatus gameStatus)
         {
-            var newState = Value;
-            newState.Status = gameStatus;
-            Value = newState;
-            OnGameStateChanged();
+            if (Status == gameStatus) return;
+            Status = gameStatus;
+            OnGameStatusChanged();
         }
 
         public IEnumerator SetGameStatusWithDelay(GameStatus gameStatus, float delayInS)
@@ -28,9 +27,9 @@ namespace Wolfpack
             SetGameStatus(gameStatus);
         }
 
-        protected virtual void OnGameStateChanged()
+        protected virtual void OnGameStatusChanged()
         {
-            StateChanged?.Invoke();
+            StatusChanged?.Invoke();
         }
     }
 }

@@ -1,27 +1,16 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
     public sealed class Wolf : MonoBehaviour
     {
-        #region Dependency Injection
-
-        readonly IGameState gameState;
-        readonly ILevelManager levelManager;
-
-        public Wolf(IGameState gameState, ILevelManager levelManager)
-        {
-            this.gameState = gameState;
-            this.levelManager = levelManager;
-        }
-        #endregion
-        
-        [SerializeField] AudioClip wolfGrowlSound;
-        
-        AudioSource audioSource;
-
         public static Action<Transform> WolfAppeared;
+
+        [SerializeField] 
+        AudioClip wolfGrowlSound;
+        AudioSource audioSource;
 
         void Awake()
         {
@@ -30,21 +19,18 @@ namespace Wolfpack
 
         void Start()
         {
-            OnWolfAppeared();
-        }
-
-        void OnWolfAppeared()
-        {
             WolfAppeared?.Invoke(transform);
         }
 
         void OnTriggerEnter(Collider other)
         {
-            if (!other.IsPlayer() || gameState.Value.Status == GameStatus.Lost) return;
+            var gameState = GameManager.Instance.State;
+                
+            if (!other.IsPlayer() || gameState.Status == GameStatus.Lost) return;
             gameState.SetGameStatus(GameStatus.Lost);
             audioSource.PlayOneShot(wolfGrowlSound);
             FadeInImage.Instance.Fade(FadeDirection.In, .1f);
-            StartCoroutine(levelManager.LoadLevelWithDelay(LevelName.Game.ToString(), 3f));
+            StartCoroutine(GameManager.Instance.Level.LoadLevelWithDelay(LevelName.Game.ToString(), 3f));
         }
     }
 }

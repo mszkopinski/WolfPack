@@ -373,7 +373,6 @@ GameObject:
   - component: {fileID: 82127910822660936}
   - component: {fileID: 95383499035685896}
   - component: {fileID: 54750155882067432}
-  - component: {fileID: 114213966767955426}
   - component: {fileID: 114898787567897182}
   - component: {fileID: 114750179611869342}
   - component: {fileID: 114723624867429154}
@@ -2328,17 +2327,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114213966767955426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1208484540431328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f8c409e82b7c142b9de17ff6674448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114723624867429154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2390,7 +2378,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 10
   teleportDistance: 2.3
-  isPlayer: 0
 --- !u!136 &136014461295680496
 CapsuleCollider:
   m_ObjectHideFlags: 1

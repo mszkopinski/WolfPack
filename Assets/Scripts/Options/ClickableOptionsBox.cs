@@ -1,23 +1,11 @@
 ﻿using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Wolfpack
 {
     public class ClickableOptionsBox : MonoBehaviour
     {
-        #region Dependency Injection 
-
-        readonly IGameState gameState;
-        readonly ILevelManager levelManager;
-
-        public ClickableOptionsBox(IGameState gameState, ILevelManager levelManager)
-        {
-            this.gameState = gameState;
-            this.levelManager = levelManager;
-        }
-
-        #endregion
-
         public GameLifecycleAction Action;
 
         Material[] materials;
@@ -25,7 +13,7 @@ namespace Wolfpack
         Vector4 defaultTiling;
         float defaultHologramVelocity;
         float defaultGlowIntensity;
-        bool IsMenuLoaded => gameState.Value.Status == GameStatus.Menu;
+        bool IsMenuLoaded => GameManager.Instance.State.Status == GameStatus.Menu;
 
         void Awake()
         {
@@ -46,10 +34,10 @@ namespace Wolfpack
             {
                 case GameLifecycleAction.StartGame:
                     FadeInImage.Instance.Fade(FadeDirection.In, 1f);
-                    StartCoroutine(levelManager.LoadLevelWithDelay(LevelName.Game.ToString(), 3f));
+                    StartCoroutine(GameManager.Instance.Level.LoadLevelWithDelay(LevelName.Game.ToString(), 3f));
                     break;
                 case GameLifecycleAction.ExitGame:
-                    levelManager.Quit();
+                    GameManager.Instance.Level.Quit();
                     break;
             }
         }
