@@ -1667,10 +1667,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1473693042358994, guid: 085bacfc026a4ac4c957e6fc5c6ede96, type: 2}
-      propertyPath: m_Name
-      value: Wolf-Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 085bacfc026a4ac4c957e6fc5c6ede96, type: 2}
   m_IsPrefabAsset: 0

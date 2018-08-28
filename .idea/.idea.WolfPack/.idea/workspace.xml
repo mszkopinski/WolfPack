@@ -2,30 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69775823-c1d8-440d-9805-cde523ce8271" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementSettings.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utility/CameraExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utility/CameraExtensions.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WolfPack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WolfPack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WolfPack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WolfPack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/External Assets/PostProcessing/Utilities/CustomMotionTexture/ExampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/External Assets/PostProcessing/Utilities/CustomMotionTexture/ExampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/SampleGame1 (Beginner)/Asteroids.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/SampleGame1 (Beginner)/Asteroids.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/SampleGame2 (Advanced)/Scenes/SpaceFighter.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/SampleGame2 (Advanced)/Scenes/SpaceFighter.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cameras/Camera_Game.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cameras/Camera_Game.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf_Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf_Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf_Static.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf_Static.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf-Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wolfs/Wolf-Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utility/AnimatorExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utility/AnimatorExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/Menu.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,19 +59,19 @@
       <file leaf-file-name="PlayerMovementController.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+            <state relative-caret-position="572">
+              <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
               <folding>
-                <marker date="1535445436151" expanded="true" signature="6:59" ph="..." />
-                <marker date="1535445436151" expanded="true" signature="79:2691" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="176:2689" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="419:584" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="606:902" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="929:1902" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="1132:1440" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="1944:2269" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="2327:2553" ph="{...}" />
-                <marker date="1535445436151" expanded="true" signature="2575:2683" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="6:34" ph="..." />
+                <marker date="1535448508542" expanded="true" signature="54:3109" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="151:3107" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="424:589" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="611:942" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="969:2015" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="1697:2005" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="2057:2601" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="2659:2885" ph="{...}" />
+                <marker date="1535448508542" expanded="true" signature="2907:3101" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -100,12 +80,12 @@
       <file leaf-file-name="PlayerMovementSettings.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementSettings.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+            <state relative-caret-position="210">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
-                <marker date="1535445197154" expanded="true" signature="6:43" ph="..." />
-                <marker date="1535445197154" expanded="true" signature="63:608" ph="{...}" />
-                <marker date="1535445197154" expanded="true" signature="239:606" ph="{...}" />
+                <marker date="1535447243549" expanded="true" signature="6:43" ph="..." />
+                <marker date="1535447243549" expanded="true" signature="63:608" ph="{...}" />
+                <marker date="1535447243549" expanded="true" signature="239:606" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -377,12 +357,12 @@
       <workItem from="1535357300680" duration="7336000" />
       <workItem from="1535374904180" duration="1808000" />
       <workItem from="1535382588380" duration="12569000" />
-      <workItem from="1535438792439" duration="5105000" />
+      <workItem from="1535438792439" duration="7286000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29937000" />
+    <option name="totallyTimeSpent" value="32118000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -727,31 +707,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementSettings.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
-            <marker date="1535445197154" expanded="true" signature="6:43" ph="..." />
-            <marker date="1535445197154" expanded="true" signature="63:608" ph="{...}" />
-            <marker date="1535445197154" expanded="true" signature="239:606" ph="{...}" />
+            <marker date="1535447243549" expanded="true" signature="6:43" ph="..." />
+            <marker date="1535447243549" expanded="true" signature="63:608" ph="{...}" />
+            <marker date="1535447243549" expanded="true" signature="239:606" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovementController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+        <state relative-caret-position="572">
+          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
           <folding>
-            <marker date="1535445436151" expanded="true" signature="6:59" ph="..." />
-            <marker date="1535445436151" expanded="true" signature="79:2691" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="176:2689" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="419:584" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="606:902" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="929:1902" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="1132:1440" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="1944:2269" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="2327:2553" ph="{...}" />
-            <marker date="1535445436151" expanded="true" signature="2575:2683" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="6:34" ph="..." />
+            <marker date="1535448508542" expanded="true" signature="54:3109" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="151:3107" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="424:589" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="611:942" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="969:2015" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="1697:2005" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="2057:2601" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="2659:2885" ph="{...}" />
+            <marker date="1535448508542" expanded="true" signature="2907:3101" ph="{...}" />
           </folding>
         </state>
       </provider>

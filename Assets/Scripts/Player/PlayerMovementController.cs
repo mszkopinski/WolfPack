@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Audio;
 using WolfPack;
 
 namespace Wolfpack
@@ -15,6 +14,7 @@ namespace Wolfpack
         Camera camera;
         float currentVelocity;
         float defaultFieldOfView;
+        float currentStamina;
 
         void Awake()
         {
@@ -30,6 +30,7 @@ namespace Wolfpack
             animator.speed = Settings.DefaultAnimatorSpeed;
             currentVelocity = Settings.DefaultMovementVelocity;
             defaultFieldOfView = camera.fieldOfView;
+            currentStamina = 100f;
         }
     
         void Update()
@@ -40,7 +41,18 @@ namespace Wolfpack
                 return;
 
             input.OnUpdate();
+            var isForwardPressed = input.Vertical > 0f;
+            
+            currentVelocity = Mathf.MoveTowards(currentVelocity, 
+                isForwardPressed
+                    ? Settings.MaxMovementVelocity
+                    : Settings.DefaultMovementVelocity,
+                (isForwardPressed
+                    ? Settings.Acceleration
+                    : Settings.Acceleration * 0.6f) * Time.deltaTime);
 
+            transform.position += transform.forward * currentVelocity * Time.deltaTime;
+            
             if (input.OnHorizontalDown)
             {
                 var horizontal = input.Horizontal;
@@ -48,21 +60,14 @@ namespace Wolfpack
                 Settings.AudioMixer.SetFloat("musicVol", -15f);
                 StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() => TeleportWolf(horizontal)));
             }
-
-            currentVelocity = Mathf.MoveTowards(currentVelocity, 
-                input.Vertical > 0f 
-                    ? Settings.MaxMovementVelocity
-                    : Settings.DefaultMovementVelocity,
-                (input.Vertical > 0f
-                    ? Settings.Acceleration
-                    : Settings.Acceleration * 0.6f) * Time.deltaTime);
-
-            transform.position += transform.forward * currentVelocity * Time.deltaTime;
         }
 
         void HandleAccelerationEffects()
         {
-            var velocityMultiplier = -(1f - currentVelocity / Settings.DefaultMovementVelocity);
+            var velocityMultiplier = -(1f - currentVelocity / Settings.DefaultMovementVelocity); // Range(0f, 1f)
+            currentStamina = Mathf.MoveTowards(currentStamina,
+                input.Vertical > 0f ? 0f : 100f,
+                (input.Vertical > 0f ? 15f * velocityMultiplier : 15f) * Time.deltaTime);
             camera.SetFieldOfView(defaultFieldOfView + velocityMultiplier * 30f);
             animator.SetPlaybackSpeed(Settings.DefaultAnimatorSpeed + velocityMultiplier * Settings.AnimatorSpeedMultiplier);
         }
@@ -77,6 +82,7 @@ namespace Wolfpack
         void OnGUI()
         {
             GUI.Label(new Rect(0, 75, 250, 25), $"Player Velocity: {currentVelocity}");
+            GUI.Label(new Rect(0, 100, 250, 25), $"Player Energy: {currentStamina}");
         }
     }
 }
