@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Michal\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_WolfPack.1198208695.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Michal\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Michal\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_WolfPack.1198208695.00" t="ExcludeRecursive" />
     <e p="C:\Users\Michal\repos\Unity\WolfPack" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
@@ -182,6 +183,7 @@
                     <e p="MpmWindow.cs" t="Include" />
                   </e>
                   <e p="MpmSettingsInstaller.cs" t="Include" />
+                  <e p="Zenject-PoolMonitor-Editor.asmdef" t="Include" />
                 </e>
               </e>
               <e p="SampleGame1 (Beginner)" t="Include">
@@ -311,12 +313,14 @@
               </e>
               <e p="TestFramework" t="Include">
                 <e p="Editor" t="Include">
+                  <e p="Zenject-TestFramework-Editor.asmdef" t="Include" />
                   <e p="ZenjectUnitTestFixture.cs" t="Include" />
                   <e p="ZenTestMenuItems.cs" t="Include" />
                 </e>
                 <e p="SceneTestFixture.cs" t="Include" />
                 <e p="SceneTestFixtureSceneReference.cs" t="Include" />
                 <e p="ValidateOnlyAttribute.cs" t="Include" />
+                <e p="Zenject-TestFramework.asmdef" t="Include" />
                 <e p="ZenjectIntegrationTestFixture.cs" t="Include" />
                 <e p="ZenjectTestUtil.cs" t="Include" />
               </e>
@@ -472,6 +476,7 @@
                   <e p="SceneParentAutomaticLoader.cs" t="Include" />
                 </e>
                 <e p="UnityInspectorListEditor.cs" t="Include" />
+                <e p="Zenject-Editor.asmdef" t="Include" />
                 <e p="ZenMenuItems.cs" t="Include" />
                 <e p="ZenUnityEditorUtil.cs" t="Include" />
               </e>
@@ -658,6 +663,7 @@
               </e>
             </e>
             <e p="Version.txt" t="Include" />
+            <e p="Zenject.asmdef" t="Include" />
           </e>
         </e>
         <e p="Scripts" t="Include">
@@ -706,6 +712,7 @@
             <e p="CameraExtensions.cs" t="Include" />
             <e p="MaterialExtensions.cs" t="Include" />
             <e p="MonoSingleton.cs" t="Include" />
+            <e p="Paths.cs" t="Include" />
             <e p="TagExtensions.cs" t="Include" />
           </e>
           <e p="Wolf" t="Include">

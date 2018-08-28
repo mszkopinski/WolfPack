@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using WolfPack;
 
 namespace Wolfpack
@@ -30,7 +31,7 @@ namespace Wolfpack
             animator.speed = Settings.DefaultAnimatorSpeed;
             currentVelocity = Settings.DefaultMovementVelocity;
             defaultFieldOfView = camera.fieldOfView;
-            currentStamina = 100f;
+            currentStamina = Settings.DefaultStamina;
         }
     
         void Update()
@@ -58,9 +59,13 @@ namespace Wolfpack
                 var horizontal = input.Horizontal;
                 Settings.AudioMixer.SetFloat("sfxVol", 15f);
                 Settings.AudioMixer.SetFloat("musicVol", -15f);
-                StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() => TeleportWolf(horizontal)));
+                StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() =>
+                {
+                    currentStamina -= Settings.JumpStaminaCost;
+                    ChangeLine(horizontal);
+                }));
             }
-        }
+        }   
 
         void HandleAccelerationEffects()
         {
@@ -72,10 +77,27 @@ namespace Wolfpack
             animator.SetPlaybackSpeed(Settings.DefaultAnimatorSpeed + velocityMultiplier * Settings.AnimatorSpeedMultiplier);
         }
         
-        void TeleportWolf(float horizontalInput)
+        void ChangeLine(float horizontalInput)
         {
+            var tolerance = 0.2f;
+            var shouldGoRight = horizontalInput > 0f;
             var newPosition = transform.position;
-            newPosition.z = horizontalInput > 0f ? transform.position.z + 2.3f : transform.position.z - 2.3f;
+
+            if (shouldGoRight)
+            {
+                if (Math.Abs(newPosition.z - Paths.Center) < tolerance)
+                    newPosition.z = Paths.RightMost;
+                else if (Math.Abs(newPosition.z - Paths.LeftMost) < tolerance)
+                    newPosition.z = Paths.Center;
+            }
+            else
+            {
+                if (Math.Abs(newPosition.z - Paths.RightMost) < tolerance)
+                    newPosition.z = Paths.Center;
+                else if (Math.Abs(newPosition.z - Paths.Center) < tolerance)
+                    newPosition.z = Paths.LeftMost; 
+            }
+
             transform.position = newPosition;
         }
 
