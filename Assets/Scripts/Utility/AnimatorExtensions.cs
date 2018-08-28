@@ -24,5 +24,10 @@ namespace Wolfpack
 
             return 0f;
         }
+
+        public static void SetPlaybackSpeed(this Animator animator, float value)
+        {
+            animator.speed = value;
+        }
     }
 }

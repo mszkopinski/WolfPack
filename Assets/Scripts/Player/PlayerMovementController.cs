@@ -1,72 +1,70 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
+using WolfPack;
 
 namespace Wolfpack
 {
     [RequireComponent(typeof(Wolf))]
     public class PlayerMovementController : MonoBehaviour
     {
-        [SerializeField] 
-        Camera headCamera;
-        
-        [Header("Movement Settings")] 
-        [SerializeField]
-        float maxMovementVelocity = 20f;
-        [SerializeField] 
-        float acceleration = 2f;
-        [SerializeField] 
-        float defaultMovementVelocity = 10f;
-        [SerializeField]
-        float defaultAnimatorSpeed = 1f;
-        [SerializeField]
-        float animatorSpeedMultiplier = 1f;
+        public PlayerMovementSettings Settings;
 
-        Wolf wolf;
         IInputController input;
+        Wolf wolf;
         Animator animator;
-        
+        Camera camera;
         float currentVelocity;
-        float defaultCameraFOV;
+        float defaultFieldOfView;
 
         void Awake()
         {
             animator = GetComponent<Animator>();
             wolf = GetComponent<Wolf>();
+            camera = GetComponentInChildren<Camera>();
         }
 
         void Start()
         {
-            input = GameManager.Instance.Input;
-            currentVelocity = defaultMovementVelocity;
+            input = GameManager.Instance.Input;    
             animator.SetFloat("vertical", 1f);
-            animator.speed = defaultAnimatorSpeed;
-            defaultCameraFOV = headCamera.fieldOfView;
+            animator.speed = Settings.DefaultAnimatorSpeed;
+            currentVelocity = Settings.DefaultMovementVelocity;
+            defaultFieldOfView = camera.fieldOfView;
         }
     
         void Update()
         {
+            HandleAccelerationEffects();            
+            
             if (input == null)
                 return;
-            
+
             input.OnUpdate();
 
             if (input.OnHorizontalDown)
             {
                 var horizontal = input.Horizontal;
+                Settings.AudioMixer.SetFloat("sfxVol", 15f);
+                Settings.AudioMixer.SetFloat("musicVol", -15f);
                 StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() => TeleportWolf(horizontal)));
             }
 
             currentVelocity = Mathf.MoveTowards(currentVelocity, 
                 input.Vertical > 0f 
-                    ? maxMovementVelocity
-                    : defaultMovementVelocity,
+                    ? Settings.MaxMovementVelocity
+                    : Settings.DefaultMovementVelocity,
                 (input.Vertical > 0f
-                    ? acceleration
-                    : acceleration * 0.6f) * Time.deltaTime);
+                    ? Settings.Acceleration
+                    : Settings.Acceleration * 0.6f) * Time.deltaTime);
 
-            var velocityMultiplier = -(1f - currentVelocity / defaultMovementVelocity);
-            headCamera.fieldOfView = defaultCameraFOV + velocityMultiplier * 20f;
-            animator.speed = defaultAnimatorSpeed + velocityMultiplier * animatorSpeedMultiplier;
             transform.position += transform.forward * currentVelocity * Time.deltaTime;
+        }
+
+        void HandleAccelerationEffects()
+        {
+            var velocityMultiplier = -(1f - currentVelocity / Settings.DefaultMovementVelocity);
+            camera.SetFieldOfView(defaultFieldOfView + velocityMultiplier * 30f);
+            animator.SetPlaybackSpeed(Settings.DefaultAnimatorSpeed + velocityMultiplier * Settings.AnimatorSpeedMultiplier);
         }
         
         void TeleportWolf(float horizontalInput)
