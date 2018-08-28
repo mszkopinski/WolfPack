@@ -46,6 +46,7 @@ namespace Wolfpack
             if (!IsMenuLoaded) return;
             
             audioSource.Play();
+//            GameManager.Instance.AudioMixer.SetFloat("musicPitch", 0.98f);
             var mat = materials[0];
             mat.SetVector("_Hologram_Texture_Tiling", new Vector4(0f, 20f, 0f, 0f));
             mat.SetFloat("_Hologram_Velocity", -1f);
@@ -57,6 +58,7 @@ namespace Wolfpack
             if (!IsMenuLoaded) return;
             
             audioSource.Stop();
+//            GameManager.Instance.AudioMixer.SetFloat("musicPitch", 1f);
             var mat = materials[0];
             mat.SetVector("_Hologram_Texture_Tiling", defaultTiling);
             mat.SetFloat("_Hologram_Velocity", defaultHologramVelocity);

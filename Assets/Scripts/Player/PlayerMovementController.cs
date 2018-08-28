@@ -57,19 +57,29 @@ namespace Wolfpack
             if (input.OnHorizontalDown)
             {
                 var horizontal = input.Horizontal;
-                Settings.AudioMixer.SetFloat("sfxVol", 15f);
-                Settings.AudioMixer.SetFloat("musicVol", -15f);
                 StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() =>
                 {
                     currentStamina -= Settings.JumpStaminaCost;
                     ChangeLine(horizontal);
                 }));
             }
+
+            if (input.OnVerticalDown)
+            {
+
+            }
         }   
 
         void HandleAccelerationEffects()
         {
             var velocityMultiplier = -(1f - currentVelocity / Settings.DefaultMovementVelocity); // Range(0f, 1f)
+
+//            GameManager.Instance.AudioMixer.SetFloat("musicPitch", 0.9f + 0.1f * velocityMultiplier);
+//            GameManager.Instance.AudioMixer.SetFloat("musicPitch", 1f - 0.1f * velocityMultiplier);
+            
+            GameManager.Instance.AudioMixer.SetVolume("musicVolume", 1f - velocityMultiplier * 0.15f);
+            GameManager.Instance.AudioMixer.SetVolume("noiseVolume", velocityMultiplier * 0.8f);
+            GameManager.Instance.AudioMixer.SetVolume("sfxVolume", 1f - velocityMultiplier * 0.4f);
             currentStamina = Mathf.MoveTowards(currentStamina,
                 input.Vertical > 0f ? 0f : 100f,
                 (input.Vertical > 0f ? 15f * velocityMultiplier : 15f) * Time.deltaTime);

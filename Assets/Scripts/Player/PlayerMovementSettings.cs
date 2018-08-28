@@ -6,8 +6,6 @@ namespace Wolfpack
     [CreateAssetMenu(fileName = "PlayerMovementSettings", menuName = "WolfPack/Player Movement Settings")]
     public class PlayerMovementSettings : ScriptableObject
     {
-        public AudioMixer AudioMixer;
-        
         [Header("Movement")] 
         public float MaxMovementVelocity = 20f;
         public float Acceleration = 2f;
