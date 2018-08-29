@@ -62,7 +62,7 @@ namespace Wolfpack
         void OnStatusChanged()
         {
             var status = GameManager.Instance.State.Status;
-            Debug.Log(status);
+            Log.Console(status);
 
             if (status == GameStatus.Game)
                 canMove = true;

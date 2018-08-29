@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 using Zenject;
 
@@ -35,7 +34,7 @@ namespace Wolfpack
         void Start()
         {
             AudioSource.ChangeClip(MenuTrack);
-            FadeInImage.Instance.Fade(FadeDirection.Out, 10f);
+            ScreenFading.Instance.Fade(FadeDirection.Out, 10f);
             StartCoroutine(State.SetGameStatusWithDelay(GameStatus.Intro, .1f));
             Level.LevelChanged += OnLevelChanged;
         }
@@ -49,14 +48,22 @@ namespace Wolfpack
         public void LoadGame()
         {
             StartCoroutine(Level.LoadLevelWithDelay("Game", 10f));
+            SuppressVolumeAndChangeMusicPitch();
+            ChangeTrackAndIncreaseVolume();
+            ScreenFading.Instance.Fade(FadeDirection.In, 1f);
+        }
+
+        void SuppressVolumeAndChangeMusicPitch()
+        {
             StartCoroutine(AudioMixer.ChangeFloatOverTime("musicPitch", 0.4f, 3f));
             StartCoroutine(AudioMixer.ChangeVolumeOverTime("sfxVolume", 0.0f, 3f));
-//            StartCoroutine(AudioMixer.ChangeVolumeOverTime("musicVolume", 0.5f, 6f));
             StartCoroutine(AudioMixer.ChangeVolumeOverTimeWithDelay("musicVolume", 0.0f, 1f, 5f));
+        }
 
+        void ChangeTrackAndIncreaseVolume()
+        {
             StartCoroutine(AudioSource.ChangeClipWithDelay(GameTrack, 6f, () => AudioSource.time = 15f));
             StartCoroutine(AudioMixer.ChangeVolumeOverTimeWithDelay("musicVolume", 1f, 4f, 6f));
-            FadeInImage.Instance.Fade(FadeDirection.In, 1f);
         }
 
         void OnLevelChanged(string levelName)
@@ -67,8 +74,6 @@ namespace Wolfpack
 
                 StartCoroutine(AudioMixer.ChangeVolumeOverTime("sfxVolume", 1f, 3f));
                 StartCoroutine(AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 3f));
-//                StartCoroutine(AudioMixer.ChangeVolumeOverTime("musicVolume", 1f, 6f));
-//                FadeInImage.Instance.Fade(FadeDirection.Out, 5f);
             }
         }
         

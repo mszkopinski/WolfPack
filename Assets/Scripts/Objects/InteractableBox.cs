@@ -13,13 +13,13 @@ namespace Wolfpack
     
         void OnMouseDown()
         {
-            Debug.Log("Clicked");
+            Log.Console("Clicked");
             rb.AddForce(transform.forward * 200f, ForceMode.Impulse);
         }
 
         void OnMouseEnter()
         {
-            Debug.Log("Clicked");
+            Log.Console("Clicked");
         }
     }
 }

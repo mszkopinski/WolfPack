@@ -14,7 +14,7 @@ MonoBehaviour:
   MaxMovementVelocity: 20
   Acceleration: 2
   DefaultMovementVelocity: 10
-  AccelerationNoise: {fileID: 8300000, guid: 7a83eb5058b210f41addd6d0d82945a2, type: 3}
+  DefaultMovementLine: 1
   MaxStamina: 100
   DefaultStamina: 100
   JumpStaminaCost: 10

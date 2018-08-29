@@ -12,7 +12,8 @@ namespace Wolfpack
         IInputController input;
         Wolf wolf;
         Animator animator;
-        Camera camera;
+        Camera headCamera;
+        Line currentMovementLine;
         float currentVelocity;
         float defaultFieldOfView;
         float currentStamina;
@@ -21,17 +22,19 @@ namespace Wolfpack
         {
             animator = GetComponent<Animator>();
             wolf = GetComponent<Wolf>();
-            camera = GetComponentInChildren<Camera>();
+            headCamera = GetComponentInChildren<Camera>();
         }
 
         void Start()
         {
             input = GameManager.Instance.Input;    
             animator.SetFloat("vertical", 1f);
+            defaultFieldOfView = headCamera.fieldOfView;
             animator.speed = Settings.DefaultAnimatorSpeed;
             currentVelocity = Settings.DefaultMovementVelocity;
-            defaultFieldOfView = camera.fieldOfView;
             currentStamina = Settings.DefaultStamina;
+            currentMovementLine = Settings.DefaultMovementLine;
+            transform.ChangePosition("z", MovementHelper.Lines[currentMovementLine]);
         }
     
         void Update()
@@ -63,11 +66,6 @@ namespace Wolfpack
                     ChangeLine(horizontal);
                 }));
             }
-
-            if (input.OnVerticalDown)
-            {
-
-            }
         }   
 
         void HandleAccelerationEffects()
@@ -83,32 +81,26 @@ namespace Wolfpack
             currentStamina = Mathf.MoveTowards(currentStamina,
                 input.Vertical > 0f ? 0f : 100f,
                 (input.Vertical > 0f ? 15f * velocityMultiplier : 15f) * Time.deltaTime);
-            camera.SetFieldOfView(defaultFieldOfView + velocityMultiplier * 30f);
+            headCamera.SetFieldOfView(defaultFieldOfView + velocityMultiplier * 30f);
             animator.SetPlaybackSpeed(Settings.DefaultAnimatorSpeed + velocityMultiplier * Settings.AnimatorSpeedMultiplier);
         }
         
         void ChangeLine(float horizontalInput)
         {
-            var tolerance = 0.2f;
-            var shouldGoRight = horizontalInput > 0f;
-            var newPosition = transform.position;
-
-            if (shouldGoRight)
+            switch (currentMovementLine)
             {
-                if (Math.Abs(newPosition.z - Paths.Center) < tolerance)
-                    newPosition.z = Paths.RightMost;
-                else if (Math.Abs(newPosition.z - Paths.LeftMost) < tolerance)
-                    newPosition.z = Paths.Center;
-            }
-            else
-            {
-                if (Math.Abs(newPosition.z - Paths.RightMost) < tolerance)
-                    newPosition.z = Paths.Center;
-                else if (Math.Abs(newPosition.z - Paths.Center) < tolerance)
-                    newPosition.z = Paths.LeftMost; 
+                case Line.Left:
+                    currentMovementLine = horizontalInput > 0f ? Line.Center : Line.Left;
+                    break;
+                case Line.Center:
+                    currentMovementLine = horizontalInput > 0f ? Line.Right : Line.Left;
+                    break;
+                case Line.Right:
+                    currentMovementLine = horizontalInput > 0f ? Line.Right : Line.Center;
+                    break;
             }
 
-            transform.position = newPosition;
+            transform.ChangePosition("z", MovementHelper.Lines[currentMovementLine]);
         }
 
         void OnGUI()
