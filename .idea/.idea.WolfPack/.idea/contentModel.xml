@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Michal\.Rider2018.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Michal\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_WolfPack.1198208695.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Michal\repos\Unity\WolfPack" t="IncludeRecursive">
+    <e p="C:\Users\Michal\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_WolfPack.-1947425377.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Michal\Desktop\brackeys-game-jam\WolfPack" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -692,6 +691,9 @@
           <e p="Objects" t="Include">
             <e p="HallwayEmissionController.cs" t="Include" />
             <e p="InteractableBox.cs" t="Include" />
+          </e>
+          <e p="Obstacles" t="Include">
+            <e p="ObstacleFormationsSpawner.cs" t="Include" />
           </e>
           <e p="Options" t="Include">
             <e p="ClickableOptionsBox.cs" t="Include" />

@@ -62,15 +62,15 @@ namespace Wolfpack
             {
                 targetHeadRotation.x = 360f - maxVerticalLookRotation;
             }
-        
-            if (horizontalRotation >= 270f + maxHorizontalLookRotation && horizontalRotation <= 270f + maxHorizontalLookRotation + 30f)
+            
+            if (horizontalRotation >= maxHorizontalLookRotation && horizontalRotation <= maxHorizontalLookRotation + 30f)
             {
-                targetHeadRotation.y = 270f + maxHorizontalLookRotation;
+                targetHeadRotation.y = maxHorizontalLookRotation;
             }
-            else if (horizontalRotation <= 270f - maxHorizontalLookRotation &&
-                     horizontalRotation >= 270f - maxHorizontalLookRotation - 30f)
+            else if (horizontalRotation <= 360f - maxHorizontalLookRotation &&
+                     horizontalRotation >= 360f - maxHorizontalLookRotation - 30f)
             {
-                targetHeadRotation.y = 270f - maxHorizontalLookRotation;
+                targetHeadRotation.y = 360f - maxHorizontalLookRotation;
             }
         
             _camera.transform.rotation = Quaternion.Euler(targetHeadRotation);

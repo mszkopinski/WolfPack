@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -9,6 +10,18 @@ namespace Wolfpack
 {
     public static class AudioExtensions
     {
+        [CanBeNull]
+        public static AudioSource GetAudioSourceWithPriority(this AudioSource[] audioSources, int priority)
+        {
+            foreach (var audioSource in audioSources)
+            {
+                if (audioSource.priority == priority)
+                    return audioSource;
+            }
+
+            return null;
+        }
+        
         public static AudioClip GetRandomClip(this AudioClip[] audioClips)
         {
             var rnd = Random.Range(0, audioClips.Length);

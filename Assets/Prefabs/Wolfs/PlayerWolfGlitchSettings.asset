@@ -20,9 +20,9 @@ MonoBehaviour:
   MinHologramVelocity: 0.1
   DefaultHologramVelocity: 0.1
   MaxHologramVelocity: 2
-  MinGlowIntensity: 3
+  MinGlowIntensity: 12
   DefaultGlowIntensity: 3
-  MaxGlowIntensity: 4
+  MaxGlowIntensity: 20
   GlitchEffectSounds:
   - {fileID: 8300000, guid: c25acc55ccd87884392ffe4bf2a41d46, type: 3}
   - {fileID: 8300000, guid: 424b1a6f9fbee5240bdec90918030895, type: 3}

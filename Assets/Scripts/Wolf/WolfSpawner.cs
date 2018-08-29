@@ -12,20 +12,15 @@ namespace Wolfpack
     
         [SerializeField] GameObject wolfPrefab;
     
-        public void StartSpawner()
-        {
-            StartCoroutine(ConstantlySpawnWolfs());
-        }
-
-        IEnumerator ConstantlySpawnWolfs()
+        public IEnumerator StartSpawning()
         {
             while (true)
             {
-                Instantiate(
+                var randomLine = MovementHelper.GetRandomLine();
+                var wolf = Instantiate(
                     wolfPrefab, 
-                    new Vector3(0f, 0f, 
-                        MovementHelper.Lines.ElementAt(Random.Range(0, MovementHelper.Lines.Count)).Value), 
-                    Quaternion.identity);
+                    new Vector3(0f, 0f, MovementHelper.LinePositions[randomLine]), Quaternion.identity);
+                wolf.GetComponent<WolfAutoMovementController>().CurrentMovementLine = randomLine;
                 yield return new WaitForSeconds(Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns));
             }
         }

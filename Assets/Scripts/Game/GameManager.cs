@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using WolfPack;
 using Zenject;
 
 namespace Wolfpack
@@ -37,11 +38,14 @@ namespace Wolfpack
             
             State.SetGameStatusAsync(GameStatus.Intro).RunWithDelay(1f); // there was a slightly problem when running with .1f delay. Be aware
             AudioSource.ChangeClip(MenuTrack).Run();
-            ScreenFading.Instance.Fade(FadeDirection.Out, 10f);
+            ScreenFading.Instance.Fade(FadeDirection.Out, 3f);
         }
 
         void Update()
         {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.P) && Level.CurrentLevelName != "Game")
+                LoadGame();
+            
             if (UnityEngine.Input.GetKeyDown(KeyCode.K) && Level.CurrentLevelName != "Game")
                 Level.LoadLevel("Game");
         }
@@ -52,10 +56,10 @@ namespace Wolfpack
             
             AudioMixer.ChangeFloatOverTime("musicPitch", 0.4f, 3f).Run();
             AudioMixer.ChangeVolumeOverTime("sfxVolume", 0.0f, 3f).Run();
-            AudioMixer.ChangeVolumeOverTime("musicVolume", 0.0f, 1f).Run();
+            AudioMixer.ChangeVolumeOverTime("musicVolume", 0.0f, 1f).RunWithDelay(3f);
 
-            AudioSource.ChangeClip(GameTrack, () => AudioSource.time = 15f).Run();
-            AudioMixer.ChangeVolumeOverTime("musicVolume", 1f, 4f).Run();
+            AudioSource.ChangeClip(GameTrack, () => AudioSource.time = 15f).RunWithDelay(4f);
+            AudioMixer.ChangeVolumeOverTime("musicVolume", 1f, 4f).RunWithDelay(6f);
 
             ScreenFading.Instance.Fade(FadeDirection.In, 1f);
         }
@@ -66,8 +70,12 @@ namespace Wolfpack
                 return;
 
             State.SetGameStatus(GameStatus.Game);
-            StartCoroutine(AudioMixer.ChangeVolumeOverTime("sfxVolume", 1f, 3f));
-            StartCoroutine(AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 3f));
+            
+            WolfSpawner.Instance.StartSpawning().RunWithDelay(.3f);
+            ObstacleFormationsSpawner.Instance.Spawn();
+            
+            AudioMixer.ChangeVolumeOverTime("sfxVolume", 1f, 3f).Run();
+            AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 3f).Run();
         }
 
         void OnGUI()

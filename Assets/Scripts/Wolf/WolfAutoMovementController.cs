@@ -9,6 +9,8 @@ namespace Wolfpack
         [SerializeField] float movementVelocity = 20f;
         [SerializeField] float teleportDistance = 2.3f;
 
+        public Line CurrentMovementLine;
+        
         Wolf wolf;
         Animator animator;
         bool canMove = true;
@@ -23,7 +25,7 @@ namespace Wolfpack
         {
             GameManager.Instance.State.StatusChanged += OnStatusChanged;
             wolf.GlitchEffect.OnGlitch += TeleportWolf;
-            movementVelocity = Random.Range(12f, 16f);
+            movementVelocity = 16f;
             animator.speed = 1f + 1f / 12f * movementVelocity;
         }
 
@@ -38,25 +40,16 @@ namespace Wolfpack
 
         void TeleportWolf()
         {
-            var newPosition = transform.position;
-            newPosition.z = GetRandomTeleportDistance(transform.position.z);
-            transform.position = newPosition;
+            CurrentMovementLine = GetRandomTeleportLine(CurrentMovementLine);
+            transform.ChangePosition("x", MovementHelper.LinePositions[CurrentMovementLine]);
         }
 
-        float GetRandomTeleportDistance(float currentZ)
+        Line GetRandomTeleportLine(Line currentMovementLine)
         {
-            float distance; 
-            var randomNumber = Random.Range(0, 10);
-            if (randomNumber <= 2)
-                distance = teleportDistance;
-            else if (randomNumber > 2 && randomNumber <= 5f)
-                distance = -teleportDistance;
-            else
-                distance = 0f;
-
-            return Mathf.RoundToInt(distance) == Mathf.RoundToInt(currentZ)
-                ? GetRandomTeleportDistance(currentZ)
-                : distance;
+            var newLine = currentMovementLine;
+            while (newLine == currentMovementLine)
+                newLine = MovementHelper.GetRandomLine();
+            return newLine;
         }
 
         void OnStatusChanged()

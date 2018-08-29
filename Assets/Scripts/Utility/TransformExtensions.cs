@@ -10,7 +10,7 @@ namespace Wolfpack
             var newPosition = transform.position;
             
             if (coordinate == "x")
-                newPosition.z = value;
+                newPosition.x = value;
             else if (coordinate == "y")
                 newPosition.y = value;
             else if (coordinate == "z")

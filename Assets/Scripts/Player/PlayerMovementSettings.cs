@@ -16,6 +16,7 @@ namespace Wolfpack
         public float MaxStamina = 100f;
         public float DefaultStamina = 100f;
         public float JumpStaminaCost = 25f;
+        public float StaminaCooldown = 4f;
         
         [Header("Animation")]
         public float DefaultAnimatorSpeed = 1f;

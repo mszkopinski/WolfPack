@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Globalization;
+using TMPro;
+using UnityEngine;
 using WolfPack;
 
 namespace Wolfpack
@@ -8,20 +12,29 @@ namespace Wolfpack
     {
         public PlayerMovementSettings Settings;
 
+        [SerializeField] Canvas staminaCanvas;
+        [SerializeField] Canvas cooldownCanvas;
+        [SerializeField] TextMeshProUGUI velocityText;
+        [SerializeField] TextMeshProUGUI staminaText;
+        [SerializeField] AudioClip noStaminaAudio;
+
         IInputController input;
         Wolf wolf;
         Animator animator;
         Camera headCamera;
         Line currentMovementLine;
+        AudioSource noStaminaAudioSource;
         float currentVelocity;
         float defaultFieldOfView;
         float currentStamina;
+        bool canMove = true;
 
         void Awake()
         {
             animator = GetComponent<Animator>();
             wolf = GetComponent<Wolf>();
             headCamera = GetComponentInChildren<Camera>();
+            noStaminaAudioSource = GetComponents<AudioSource>().GetAudioSourceWithPriority(256);
         }
 
         void Start()
@@ -33,7 +46,9 @@ namespace Wolfpack
             currentVelocity = Settings.DefaultMovementVelocity;
             currentStamina = Settings.DefaultStamina;
             currentMovementLine = Settings.DefaultMovementLine;
-            transform.ChangePosition("z", MovementHelper.Lines[currentMovementLine]);
+            transform.ChangePosition("z", MovementHelper.LinePositions[currentMovementLine]);
+            cooldownCanvas.gameObject.SetActive(false);
+            staminaCanvas.enabled = false;
         }
     
         void Update()
@@ -44,27 +59,52 @@ namespace Wolfpack
                 return;
 
             input.OnUpdate();
+            
             var isForwardPressed = input.Vertical > 0f;
             
             currentVelocity = Mathf.MoveTowards(currentVelocity, 
-                isForwardPressed
+                canMove && isForwardPressed && currentStamina > 0f 
                     ? Settings.MaxMovementVelocity
                     : Settings.DefaultMovementVelocity,
-                (isForwardPressed
+                (canMove && isForwardPressed && currentStamina > 0f
                     ? Settings.Acceleration
-                    : Settings.Acceleration * 0.6f) * Time.deltaTime);
+                    : canMove ? Settings.Acceleration * 0.6f : Settings.Acceleration * 2f) * Time.deltaTime);
 
             transform.position += transform.forward * currentVelocity * Time.deltaTime;
             
-            if (input.OnHorizontalDown && currentStamina >= Settings.JumpStaminaCost)
+            if (canMove && input.OnHorizontalDown && currentStamina >= Settings.JumpStaminaCost)
             {
+                ChangeLine(input.Horizontal);
                 StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() =>
                 {
                     currentStamina -= Settings.JumpStaminaCost;
-                    ChangeLine(input.Horizontal);
                 }));
             }
-        }   
+
+            velocityText.text = (Math.Round(currentVelocity, 2) * 2.3).ToString(CultureInfo.InvariantCulture) + " bytes";
+            staminaText.text = Mathf.RoundToInt(currentStamina).ToString(CultureInfo.InvariantCulture);
+            staminaCanvas.enabled = currentStamina <= 0f;
+            
+            if (currentStamina <= 0f && !noStaminaAudioSource.isPlaying)
+            {
+                staminaText.enabled = false;
+                noStaminaAudioSource.PlayOneShot(noStaminaAudio);
+                AccelerationCooldown().RunWithDelay(noStaminaAudio.length - 0.1f);
+            }
+        }
+
+        IEnumerator AccelerationCooldown()
+        {
+            GameManager.Instance.AudioMixer.ChangeFloatOverTime("musicPitch", 0.4f, Settings.StaminaCooldown).Run();
+            canMove = false;
+            staminaCanvas.enabled = false;
+            cooldownCanvas.gameObject.SetActive(true);
+            yield return new WaitForSeconds(Settings.StaminaCooldown);
+            GameManager.Instance.AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 1f).Run();
+            cooldownCanvas.gameObject.SetActive(false);
+            canMove = true;
+            staminaText.enabled = true;
+        }
 
         void HandleAccelerationEffects()
         {
@@ -77,8 +117,8 @@ namespace Wolfpack
 
             // other effects
             currentStamina = Mathf.MoveTowards(currentStamina,
-                input.Vertical > 0f ? 0f : 100f,
-                (input.Vertical > 0f ? 15f * velocityMultiplier : 15f) * Time.deltaTime);
+                canMove && input.Vertical > 0f ? 0f : 100f,
+                (canMove && input.Vertical > 0f ? 15f * velocityMultiplier : 15f) * Time.deltaTime);
             headCamera.SetFieldOfView(defaultFieldOfView + velocityMultiplier * 30f);
             animator.SetPlaybackSpeed(Settings.DefaultAnimatorSpeed + velocityMultiplier * Settings.AnimatorSpeedMultiplier);
         }
@@ -98,7 +138,7 @@ namespace Wolfpack
                     break;
             }
 
-            transform.ChangePosition("z", MovementHelper.Lines[currentMovementLine]);
+            transform.ChangePosition("x", MovementHelper.LinePositions[currentMovementLine]);
         }
 
         void OnGUI()
