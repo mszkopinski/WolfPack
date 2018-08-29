@@ -21,9 +21,9 @@ namespace Wolfpack
             SceneManager.LoadScene(levelName);
         }
 
-        public IEnumerator LoadLevelWithDelay(string levelName, float delayInS)
+        public IEnumerator LoadLevelAsync(string levelName)
         {
-            yield return new WaitForSeconds(delayInS);
+            yield return null;
             SceneManager.LoadScene(levelName);
         }
 

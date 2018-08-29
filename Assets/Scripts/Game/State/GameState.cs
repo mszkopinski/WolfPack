@@ -21,9 +21,9 @@ namespace Wolfpack
             OnGameStatusChanged();
         }
 
-        public IEnumerator SetGameStatusWithDelay(GameStatus gameStatus, float delayInS)
+        public IEnumerator SetGameStatusAsync(GameStatus gameStatus)
         {
-            yield return new WaitForSeconds(delayInS);
+            yield return null;
             SetGameStatus(gameStatus);
         }
 

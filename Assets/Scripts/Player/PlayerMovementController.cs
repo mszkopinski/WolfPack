@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using WolfPack;
 
 namespace Wolfpack
@@ -57,13 +56,12 @@ namespace Wolfpack
 
             transform.position += transform.forward * currentVelocity * Time.deltaTime;
             
-            if (input.OnHorizontalDown)
+            if (input.OnHorizontalDown && currentStamina >= Settings.JumpStaminaCost)
             {
-                var horizontal = input.Horizontal;
                 StartCoroutine(wolf.GlitchEffect.PlayGlitchEffectOnce(() =>
                 {
                     currentStamina -= Settings.JumpStaminaCost;
-                    ChangeLine(horizontal);
+                    ChangeLine(input.Horizontal);
                 }));
             }
         }   
@@ -72,12 +70,12 @@ namespace Wolfpack
         {
             var velocityMultiplier = -(1f - currentVelocity / Settings.DefaultMovementVelocity); // Range(0f, 1f)
 
-//            GameManager.Instance.AudioMixer.SetFloat("musicPitch", 0.9f + 0.1f * velocityMultiplier);
-//            GameManager.Instance.AudioMixer.SetFloat("musicPitch", 1f - 0.1f * velocityMultiplier);
-            
+            // sound effects
             GameManager.Instance.AudioMixer.SetVolume("musicVolume", 1f - velocityMultiplier * 0.15f);
             GameManager.Instance.AudioMixer.SetVolume("noiseVolume", velocityMultiplier * 0.8f);
             GameManager.Instance.AudioMixer.SetVolume("sfxVolume", 1f - velocityMultiplier * 0.4f);
+
+            // other effects
             currentStamina = Mathf.MoveTowards(currentStamina,
                 input.Vertical > 0f ? 0f : 100f,
                 (input.Vertical > 0f ? 15f * velocityMultiplier : 15f) * Time.deltaTime);

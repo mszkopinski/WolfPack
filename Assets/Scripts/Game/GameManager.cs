@@ -6,18 +6,10 @@ namespace Wolfpack
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        [Header("Audio")]
-        public AudioMixer AudioMixer;
-        public AudioSource AudioSource;
-        public AudioClip MenuTrack;
-        public AudioClip GameTrack;
-        
         public IGameState State { get; private set; }
         public ILevelManager Level { get; private set; }
         public IInputController Input { get; private set; }
 
-        float currentVolume;
-        
         [Inject]
         public void Initialize(IGameState gameState, ILevelManager levelManager, IInputController inputController)
         {
@@ -25,7 +17,15 @@ namespace Wolfpack
             Level = levelManager;
             Input = inputController;
         }
-        
+
+        [Header("Audio")]
+        public AudioMixer AudioMixer;
+        public AudioSource AudioSource;
+        public AudioClip MenuTrack;
+        public AudioClip GameTrack;
+      
+        float currentVolume;
+
         void OnEnable()
         {
             DontDestroyOnLoad(this);
@@ -33,10 +33,11 @@ namespace Wolfpack
 
         void Start()
         {
-            AudioSource.ChangeClip(MenuTrack);
-            ScreenFading.Instance.Fade(FadeDirection.Out, 10f);
-            StartCoroutine(State.SetGameStatusWithDelay(GameStatus.Intro, .1f));
             Level.LevelChanged += OnLevelChanged;
+            
+            State.SetGameStatusAsync(GameStatus.Intro).RunWithDelay(1f); // there was a slightly problem when running with .1f delay. Be aware
+            AudioSource.ChangeClip(MenuTrack).Run();
+            ScreenFading.Instance.Fade(FadeDirection.Out, 10f);
         }
 
         void Update()
@@ -47,36 +48,28 @@ namespace Wolfpack
 
         public void LoadGame()
         {
-            StartCoroutine(Level.LoadLevelWithDelay("Game", 10f));
-            SuppressVolumeAndChangeMusicPitch();
-            ChangeTrackAndIncreaseVolume();
+            Level.LoadLevelAsync("Game").RunWithDelay(10f);
+            
+            AudioMixer.ChangeFloatOverTime("musicPitch", 0.4f, 3f).Run();
+            AudioMixer.ChangeVolumeOverTime("sfxVolume", 0.0f, 3f).Run();
+            AudioMixer.ChangeVolumeOverTime("musicVolume", 0.0f, 1f).Run();
+
+            AudioSource.ChangeClip(GameTrack, () => AudioSource.time = 15f).Run();
+            AudioMixer.ChangeVolumeOverTime("musicVolume", 1f, 4f).Run();
+
             ScreenFading.Instance.Fade(FadeDirection.In, 1f);
-        }
-
-        void SuppressVolumeAndChangeMusicPitch()
-        {
-            StartCoroutine(AudioMixer.ChangeFloatOverTime("musicPitch", 0.4f, 3f));
-            StartCoroutine(AudioMixer.ChangeVolumeOverTime("sfxVolume", 0.0f, 3f));
-            StartCoroutine(AudioMixer.ChangeVolumeOverTimeWithDelay("musicVolume", 0.0f, 1f, 5f));
-        }
-
-        void ChangeTrackAndIncreaseVolume()
-        {
-            StartCoroutine(AudioSource.ChangeClipWithDelay(GameTrack, 6f, () => AudioSource.time = 15f));
-            StartCoroutine(AudioMixer.ChangeVolumeOverTimeWithDelay("musicVolume", 1f, 4f, 6f));
         }
 
         void OnLevelChanged(string levelName)
         {
-            if (levelName == "Game")
-            {
-                State.SetGameStatus(GameStatus.Game);
+            if (levelName != "Game")
+                return;
 
-                StartCoroutine(AudioMixer.ChangeVolumeOverTime("sfxVolume", 1f, 3f));
-                StartCoroutine(AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 3f));
-            }
+            State.SetGameStatus(GameStatus.Game);
+            StartCoroutine(AudioMixer.ChangeVolumeOverTime("sfxVolume", 1f, 3f));
+            StartCoroutine(AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 3f));
         }
-        
+
         void OnGUI()
         {
 #if UNITY_EDITOR

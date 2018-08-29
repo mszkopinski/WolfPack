@@ -19,8 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4092731028733344}
-  - component: {fileID: 114882410964957544}
   - component: {fileID: 82404311433298638}
+  - component: {fileID: 114882410964957544}
+  - component: {fileID: 114650953383349096}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -137,6 +138,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114650953383349096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1054372213296892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6174f411906544afad1b7d4f502be7d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114882410964957544
 MonoBehaviour:
   m_ObjectHideFlags: 1

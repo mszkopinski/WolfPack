@@ -8,6 +8,6 @@ namespace Wolfpack
         GameStatus Status { get; }
         event Action StatusChanged;
         void SetGameStatus(GameStatus gameStatus);
-        IEnumerator SetGameStatusWithDelay(GameStatus gameStatus, float delayInS);
+        IEnumerator SetGameStatusAsync(GameStatus gameStatus);
     }
 }

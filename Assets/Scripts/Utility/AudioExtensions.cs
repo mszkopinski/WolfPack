@@ -89,19 +89,13 @@ namespace Wolfpack
         }
 
 
-        public static void ChangeClip(this AudioSource audioSource, AudioClip audioClip)
+        public static IEnumerator ChangeClip(this AudioSource audioSource, AudioClip audioClip, [CanBeNull] Action callback = null)
         {
+            yield return null;
             audioSource.Stop();
             audioSource.clip = audioClip;
             audioSource.Play();
-        }
-
-        public static IEnumerator ChangeClipWithDelay(this AudioSource audioSource, AudioClip audioClip, float delayInS, [CanBeNull] Action callback)
-        {
-            yield return new WaitForSeconds(delayInS);
-            audioSource.ChangeClip(audioClip);
             callback?.Invoke();
         }
-        
     }
 }

@@ -7,7 +7,7 @@ namespace Wolfpack
     {
         string CurrentLevelName { get; }
         void LoadLevel(string levelName);
-        IEnumerator LoadLevelWithDelay(string levelName, float delay);
+        IEnumerator LoadLevelAsync(string levelName);
         void Quit();
         event Action<string> LevelChanged;
     }

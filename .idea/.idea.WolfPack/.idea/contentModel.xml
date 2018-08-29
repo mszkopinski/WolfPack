@@ -710,6 +710,8 @@
             <e p="AnimatorExtensions.cs" t="Include" />
             <e p="AudioExtensions.cs" t="Include" />
             <e p="CameraExtensions.cs" t="Include" />
+            <e p="CoroutineExtensions.cs" t="Include" />
+            <e p="CoroutineRunner.cs" t="Include" />
             <e p="Log.cs" t="Include" />
             <e p="MaterialExtensions.cs" t="Include" />
             <e p="MonoSingleton.cs" t="Include" />

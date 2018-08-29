@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Wolfpack
@@ -9,33 +10,24 @@ namespace Wolfpack
         [SerializeField] float minTimeBetweenSpawns = 1f;
         [SerializeField] float maxTimeBetweenSpawns = 3f;
     
-        [SerializeField] Transform[] spawnPoints;
         [SerializeField] GameObject wolfPrefab;
-
-        void Start()
-        {
-            EnableSpawner();
-        }
     
-        public void EnableSpawner()
+        public void StartSpawner()
         {
-            StartCoroutine(SpawnWolfsCoroutine());
+            StartCoroutine(ConstantlySpawnWolfs());
         }
 
-        IEnumerator SpawnWolfsCoroutine()
+        IEnumerator ConstantlySpawnWolfs()
         {
             while (true)
             {
-                var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                SpawnWolf(spawnPoint);
+                Instantiate(
+                    wolfPrefab, 
+                    new Vector3(0f, 0f, 
+                        MovementHelper.Lines.ElementAt(Random.Range(0, MovementHelper.Lines.Count)).Value), 
+                    Quaternion.identity);
                 yield return new WaitForSeconds(Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns));
             }
-        }
-
-        void SpawnWolf(Transform spawnPoint)
-        {
-            var wolf = Instantiate(wolfPrefab, spawnPoint);
-            wolf.transform.parent = null;
         }
     }
 }
