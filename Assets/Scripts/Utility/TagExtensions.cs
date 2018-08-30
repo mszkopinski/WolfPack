@@ -13,5 +13,10 @@ namespace Wolfpack
         {
             return col.gameObject.CompareTag("Player");
         }
+
+        public static bool IsObstacle(this Collider col)
+        {
+            return col.gameObject.CompareTag("Obstacle");
+        }
     }
 }

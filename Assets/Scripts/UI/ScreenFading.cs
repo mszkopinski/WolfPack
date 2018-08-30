@@ -32,7 +32,6 @@ namespace Wolfpack
 
         IEnumerator FadeInOut(FadeDirection fadeDirection, float duration)
         {
-            Log.Console("Fade should've started");
             var elapsedTime = 0.0f;
             var color = image.color;
             while (elapsedTime < duration)
@@ -45,7 +44,6 @@ namespace Wolfpack
                 yield return null;
             }
             fadeCoroutine = null;
-            Log.Console("Fade should've ended.");
         }
     }
 }

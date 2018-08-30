@@ -14,6 +14,14 @@ namespace Wolfpack
         };
 
         public static Line GetRandomLine() => LinePositions.ElementAt(Random.Range(0, LinePositions.Count)).Key;
+
+        public static Line GetRandomLine(Line previousLine)
+        {
+            var newLine = previousLine;
+            while (newLine == previousLine)
+                newLine = GetRandomLine();
+            return newLine;
+        }
     }
 
     public enum Line

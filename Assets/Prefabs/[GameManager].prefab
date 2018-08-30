@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b23fd1cdfaca74a806b14bf1453d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 1473693042358994, guid: 085bacfc026a4ac4c957e6fc5c6ede96,
+    type: 2}
   AudioMixer: {fileID: 24100000, guid: d9d0ef82e2834f748989e4709b809ff3, type: 2}
   AudioSource: {fileID: 82404311433298638}
   MenuTrack: {fileID: 8300000, guid: 576bec04f0141ec40a24d693644701e7, type: 3}

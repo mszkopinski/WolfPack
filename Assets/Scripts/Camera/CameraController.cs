@@ -30,14 +30,14 @@ namespace Wolfpack
 
         void Start()
         {
-            Wolf.WolfAppeared += SetTarget;
+            Wolf.Spawned += SetTarget;
             GameManager.Instance.State.StatusChanged += OnStatusChanged;
         }
 
-        void SetTarget(Transform target)
+        void SetTarget(Wolf target)
         {
             if (target != null)
-                this.target = target;
+                this.target = target.transform;
         }
 
         void LateUpdate()
@@ -53,7 +53,7 @@ namespace Wolfpack
         {
             var status = GameManager.Instance.State.Status;
             
-            if (status == GameStatus.Intro)
+            if (status == GameStatus.Intro && this != null)
                 StartCoroutine(PlayIntroAnimation());
         }
 

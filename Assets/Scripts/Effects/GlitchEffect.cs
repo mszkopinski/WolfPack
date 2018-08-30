@@ -33,7 +33,7 @@ namespace Wolfpack
             OnGlitch?.Invoke();
         }
 
-        public IEnumerator PlayGlitchEffectOnce(Action callback)
+        public IEnumerator PlayGlitchEffectOnce(Action callback = null)
         {
             var audioClip = settings.GlitchEffectSounds.GetRandomClip();
             PlayGlitchEffectConstantly(audioClip);

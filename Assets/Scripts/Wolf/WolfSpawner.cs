@@ -6,11 +6,18 @@ namespace Wolfpack
 {
     public class WolfSpawner : MonoSingleton<WolfSpawner>
     {
+        public bool ShouldSpawnImmediately;
+        
         [Header("Spawn Settings")] 
         [SerializeField] float minTimeBetweenSpawns = 1f;
         [SerializeField] float maxTimeBetweenSpawns = 3f;
     
         [SerializeField] GameObject wolfPrefab;
+
+        void Start()
+        {
+            if (ShouldSpawnImmediately) StartSpawning().Run();
+        }
     
         public IEnumerator StartSpawning()
         {
@@ -20,7 +27,7 @@ namespace Wolfpack
                 var wolf = Instantiate(
                     wolfPrefab, 
                     new Vector3(0f, 0f, MovementHelper.LinePositions[randomLine]), Quaternion.identity);
-                wolf.GetComponent<WolfAutoMovementController>().CurrentMovementLine = randomLine;
+                wolf.GetComponent<AIWolfMovementController>().CurrentLine = randomLine;
                 yield return new WaitForSeconds(Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns));
             }
         }

@@ -51,15 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535fac125a2babf419821fb7013554c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShouldSpawnImmediately: 0
   obstaclePrefab: {fileID: 1557081382404558, guid: f012bd12174e7b444aa6a0dd623b824a,
     type: 2}
   firstFormationDistanceFromZero: 30
-  formationsToSpawn: 20
+  formationsToSpawn: 40
   minDistanceBetweenFormations: 8
   maxDistanceBetweenFormations: 12
   minObstacleHeight: 0
   maxObstacleHeight: 1.5
-  chanceToSpawnFormation: 0.8
+  chanceToSpawnFormation: 0.9
   chanceToSpawnOneObstacle: 50
-  chanceToSpawnTwoObstacles: 60
+  chanceToSpawnTwoObstacles: 70
   chanceToSpawnThreeObstacles: 10

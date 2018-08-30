@@ -8,7 +8,7 @@ namespace Wolfpack
     public interface IGlitchEffect
     {
         void Initialize(Material[] materials, AudioSource audioSource, GlitchEffectSettings settings);
-        IEnumerator PlayGlitchEffectOnce([CanBeNull] Action callback);
+        IEnumerator PlayGlitchEffectOnce([CanBeNull] Action callback = null);
         void PlayGlitchEffectConstantly([CanBeNull] AudioClip glitchSound);
         IEnumerator PlayGlitchEffectConstantlyWithDelay();
         event Action OnGlitch;
