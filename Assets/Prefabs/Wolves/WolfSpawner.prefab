@@ -138,10 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025f5f0dbafc4014fbfd75b6e36039d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeBetweenSpawns: 1
-  maxTimeBetweenSpawns: 3
-  spawnPoints:
-  - {fileID: 4190890816930650}
-  - {fileID: 4066036706266830}
-  - {fileID: 4513501389756200}
+  ShouldSpawnImmediately: 0
+  minTimeBetweenSpawns: 0.5
+  maxTimeBetweenSpawns: 2
   wolfPrefab: {fileID: 1208484540431328, guid: 82ebb55749aba9645bb983f2e2927539, type: 2}

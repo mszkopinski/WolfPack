@@ -48,6 +48,7 @@ namespace Wolfpack
         {
             var existingWolves = GameManager.Instance.Wolves;
             if (existingWolves.Contains(this)) existingWolves.Remove(this);
+            ScreenFading.Instance.FadeInOut(FadeDirection.In, .1f).Run();
             Destroy(gameObject);
         }
 
@@ -82,7 +83,10 @@ namespace Wolfpack
             
             // if wolf is player
             if (col is SphereCollider)
+            {
+                (col.GetComponent(typeof(Obstacle)) as Obstacle)?.Destroy();
                 OnDied();
+            }
         }
     }
 }

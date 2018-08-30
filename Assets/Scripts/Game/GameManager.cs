@@ -49,20 +49,8 @@ namespace Wolfpack
             
             State.SetGameStatusAsync(GameStatus.Intro).RunWithDelay(1f); // there was a slightly problem when running with .1f delay. Be aware
             AudioSource.ChangeClip(MenuTrack).Run();
-            ScreenFading.Instance.Fade(FadeDirection.Out, 3f);
-
+            ScreenFading.Instance.FadeInOut(FadeDirection.Out, 3f).Run();
             Wolves.CollectionChanged += (sender, args) => { WolfNumberChanged?.Invoke(); };
-            
-//            Wolf.Spawned += wolf =>
-//            {
-//                WolfNumberChanged?.Invoke();
-//                Wolves.Add(wolf);
-//            };
-//            Wolf.Died += wolf =>
-//            {
-//                WolfNumberChanged?.Invoke();
-//                Wolves.Remove(wolf);
-//            };
         }
 
         void Update()
@@ -85,7 +73,7 @@ namespace Wolfpack
             AudioSource.ChangeClip(GameTrack, () => AudioSource.time = 15f).RunWithDelay(4f);
             AudioMixer.ChangeVolumeOverTime("musicVolume", 1f, 4f).RunWithDelay(6f);
 
-            ScreenFading.Instance.Fade(FadeDirection.In, 1f);
+            ScreenFading.Instance.FadeInOut(FadeDirection.In, 1f).Run();
         }
 
         void OnLevelChanged(string levelName)

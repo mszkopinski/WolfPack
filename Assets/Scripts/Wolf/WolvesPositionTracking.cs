@@ -31,11 +31,12 @@ namespace Wolfpack
 
         void CheckForPositionChanges()
         {
-            currentlyRunningWolves = GameManager.Instance.Wolves.Select(wolf => wolf).ToList();
+//            currentlyRunningWolves = GameManager.Instance.Wolves.Select(wolf => wolf).ToList();
+            
             FastestWolves.Clear();
-            FastestWolves = currentlyRunningWolves
-                .OrderBy(wolf => wolf?.gameObject.transform.position.z)
-                .Skip(Math.Max(0, currentlyRunningWolves.Count - 3))
+            FastestWolves = GameManager.Instance.Wolves
+                .OrderBy(wolf => wolf.transform.position.z)
+                .Skip(Math.Max(0, GameManager.Instance.Wolves.Count - 3))
                 .Reverse()
                 .ToList();
             

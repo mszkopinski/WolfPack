@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 namespace Wolfpack
@@ -12,6 +13,16 @@ namespace Wolfpack
         public static void RunWithDelay(this IEnumerator enumerator, float delayInS)
         {
             CoroutineRunner.Instance.Run(enumerator, delayInS);
+        }
+        
+        public static void Run(this IEnumerator enumerator, Action callback)
+        {
+            CoroutineRunner.Instance.Run(enumerator, callback);
+        }
+        
+        public static void RunWithDelay(this IEnumerator enumerator, float delayInS, Action callback)
+        {
+            CoroutineRunner.Instance.Run(enumerator, delayInS, callback);
         }
     }
 }
