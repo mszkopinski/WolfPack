@@ -61,23 +61,25 @@ namespace Wolfpack
             var wolfAIMovement = GetComponent<AIWolfMovementController>();
             if (wolfAIMovement != null)
             {
-                if (Random.Range(0f, 100f) < 100f - wolfAIMovement.ObstacleAvoidanceChances)
+                var nearestFormation = ObstacleFormationsSpawner.Instance.GetNearestFormation(transform);
+
+                if (Random.Range(0f, 100f) < 100f - wolfAIMovement.ObstacleAvoidanceChances
+                    || nearestFormation == null)
                 {
                     (col.GetComponent(typeof(Obstacle)) as Obstacle)?.Destroy();
                     OnDied();
                     return;
                 }
+                
                 wolfAIMovement.CanRandomlyTeleport = false;
-                var nearestFormation = ObstacleFormationsSpawner.Instance.GetNearestFormation(transform);
                 var possibleLines = MovementHelper.LinePositions
                     .Select(pair => pair.Key)
                     .Except(nearestFormation.OccupiedLines)
                     .ToList();
-                var lineToTeleport = possibleLines.Count > 1 
-                    ? possibleLines.FirstOrDefault(line => line != wolfAIMovement.CurrentLine) 
-                    : possibleLines.First();
                 GlitchEffect.PlayGlitchEffectOnce().Run();
-                wolfAIMovement.TeleportWolf(lineToTeleport);
+                wolfAIMovement.TeleportWolf(possibleLines.Count > 1 
+                    ? possibleLines.FirstOrDefault(line => line != wolfAIMovement.CurrentLine) 
+                    : possibleLines.First());
                 wolfAIMovement.RestoreAbilityToTeleport().RunWithDelay(2f);
                 return;
             }

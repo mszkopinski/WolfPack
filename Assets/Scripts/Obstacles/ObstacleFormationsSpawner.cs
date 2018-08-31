@@ -32,12 +32,12 @@ namespace Wolfpack
 
         void Start()
         {
-            obstacleFormations = new List<ObstacleFormation>();
             if (ShouldSpawnImmediately) Spawn();
         }
 
         public void Spawn()
         {
+            obstacleFormations = new List<ObstacleFormation>();
             lastFormationPosition = firstFormationDistanceFromZero;
 
             for (var i = 0; i < formationsToSpawn; i++)
@@ -70,9 +70,15 @@ namespace Wolfpack
 
         public ObstacleFormation GetNearestFormation(Transform target)
         {
+            if (obstacleFormations == null)
+            {
+                Debug.LogWarning("obstacleFormations are nought in Spawner. IDK WHY");
+                return null;
+            }
+            
             var nearestFormation = obstacleFormations.Last();
             var targetDistance = target.position.z;
-
+            
             foreach (var formation in obstacleFormations)
             {
                 var distanceBetweenCurrentFormation = Math.Abs(formation.Distance - targetDistance);
@@ -96,13 +102,6 @@ namespace Wolfpack
                 obstaclesInFormation = 2;
 
             return obstaclesInFormation;
-        }
-
-        void OnDestroy()
-        {
-            obstacleFormations.Clear();
-            obstacleFormations = null;
-            obstacleFormations = new List<ObstacleFormation>();
         }
     }
 
