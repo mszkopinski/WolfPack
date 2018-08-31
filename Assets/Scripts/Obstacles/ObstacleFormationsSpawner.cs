@@ -28,10 +28,11 @@ namespace Wolfpack
         [SerializeField, Range(0, 100)] int chanceToSpawnThreeObstacles = 10;
 
         float lastFormationPosition;
-        readonly List<ObstacleFormation> ObstacleFormations = new List<ObstacleFormation>();
+        List<ObstacleFormation> obstacleFormations;
 
         void Start()
         {
+            obstacleFormations = new List<ObstacleFormation>();
             if (ShouldSpawnImmediately) Spawn();
         }
 
@@ -48,9 +49,11 @@ namespace Wolfpack
                     maxObstacleHeight);
                 
                 SpawnFormation(obstacleFormation);
-                ObstacleFormations.Add(obstacleFormation);
+                obstacleFormations.Add(obstacleFormation);
                 lastFormationPosition += Random.Range(minDistanceBetweenFormations, maxDistanceBetweenFormations);
             }
+            
+            Debug.Log(obstacleFormations.Count);
         }
 
         void SpawnFormation(ObstacleFormation obstacleFormation)
@@ -67,10 +70,10 @@ namespace Wolfpack
 
         public ObstacleFormation GetNearestFormation(Transform target)
         {
-            var nearestFormation = ObstacleFormations.Last();
+            var nearestFormation = obstacleFormations.Last();
             var targetDistance = target.position.z;
 
-            foreach (var formation in ObstacleFormations)
+            foreach (var formation in obstacleFormations)
             {
                 var distanceBetweenCurrentFormation = Math.Abs(formation.Distance - targetDistance);
                 var distanceBetweenCurrentNearestFormation = Math.Abs(nearestFormation.Distance - targetDistance);
@@ -93,6 +96,13 @@ namespace Wolfpack
                 obstaclesInFormation = 2;
 
             return obstaclesInFormation;
+        }
+
+        void OnDestroy()
+        {
+            obstacleFormations.Clear();
+            obstacleFormations = null;
+            obstacleFormations = new List<ObstacleFormation>();
         }
     }
 

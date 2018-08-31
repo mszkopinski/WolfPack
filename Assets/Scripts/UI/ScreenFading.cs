@@ -24,7 +24,7 @@ namespace Wolfpack
             var color = image.color;
             while (elapsedTime < duration)
             {
-                elapsedTime += Time.deltaTime ;
+                elapsedTime += Time.deltaTime;
                 color.a = fadeDirection == FadeDirection.Out 
                     ? 1.0f - Mathf.Clamp01(elapsedTime / duration) 
                     : 0.0f + Mathf.Clamp01(elapsedTime / duration);

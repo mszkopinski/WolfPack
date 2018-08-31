@@ -40,6 +40,13 @@ namespace Wolfpack
                 this.target = target.transform;
         }
 
+        public void StopTracking(Wolf target)
+        {
+            if (this.target != target) return;
+            transform.parent = null;
+            this.target = null;
+        }    
+
         void LateUpdate()
         {
             if (!target) return;

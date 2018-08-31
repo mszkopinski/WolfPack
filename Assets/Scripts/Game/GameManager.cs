@@ -46,11 +46,23 @@ namespace Wolfpack
         void Start()
         {
             Level.LevelChanged += OnLevelChanged;
-            
-            State.SetGameStatusAsync(GameStatus.Intro).RunWithDelay(1f); // there was a slightly problem when running with .1f delay. Be aware
+            State.SetGameStatusAsync(GameStatus.Intro).RunWithDelay(.1f); // there was a slightly problem when running with .1f delay. Be aware
             AudioSource.ChangeClip(MenuTrack).Run();
             ScreenFading.Instance.FadeInOut(FadeDirection.Out, 3f).Run();
             Wolves.CollectionChanged += (sender, args) => { WolfNumberChanged?.Invoke(); };
+            Wolf.Died += wolf =>
+            {
+                if (wolf.CompareTag("Player"))
+                {
+                    RestartGame();
+                }
+            };
+        }
+
+        void RestartGame()
+        {
+            Log.Console("Should restart game.");
+            Level.LoadLevelAsync("Game").RunWithDelay(2f, () => SetGameScene());
         }
 
         void Update()
@@ -78,17 +90,21 @@ namespace Wolfpack
 
         void OnLevelChanged(string levelName)
         {
-            if (levelName != "Game")
+            Wolves.Clear();
+            if (levelName != "Game" || State.Status == GameStatus.Game)
                 return;
 
             State.SetGameStatus(GameStatus.Game);
-
-            SpawnPlayer().RunWithDelay(.001f); // additional delay for Zenject dependency injection process to do everything work.
-            WolfSpawner.Instance.StartSpawning().RunWithDelay(.3f);
-            ObstacleFormationsSpawner.Instance.Spawn();
-            
+            SetGameScene();
             AudioMixer.ChangeVolumeOverTime("sfxVolume", 1f, 3f).Run();
             AudioMixer.ChangeFloatOverTime("musicPitch", 1f, 3f).Run();
+        }
+
+        void SetGameScene()
+        {
+            // additional delay for Zenject dependency injection process to do everything work.
+            SpawnPlayer().RunWithDelay(.001f, ObstacleFormationsSpawner.Instance.Spawn); 
+            WolfSpawner.Instance.StartSpawning().RunWithDelay(.3f);
         }
 
         IEnumerator SpawnPlayer()

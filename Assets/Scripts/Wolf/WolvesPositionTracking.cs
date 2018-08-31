@@ -33,13 +33,13 @@ namespace Wolfpack
         {
 //            currentlyRunningWolves = GameManager.Instance.Wolves.Select(wolf => wolf).ToList();
             
-            FastestWolves.Clear();
-            FastestWolves = GameManager.Instance.Wolves
-                .OrderBy(wolf => wolf.transform.position.z)
-                .Skip(Math.Max(0, GameManager.Instance.Wolves.Count - 3))
-                .Reverse()
-                .ToList();
-            
+//            FastestWolves.Clear();
+//            FastestWolves = GameManager.Instance.Wolves
+//                .OrderBy(wolf => wolf.transform.position.z)
+//                .Skip(Math.Max(0, GameManager.Instance.Wolves.Count - 3))
+//                .Reverse()
+//                .ToList();
+//            
             for (var i = 0; i < FastestWolves.Count; i++)
                 FastestWolves[i].SendMessage("SetRacePosition", i + 1, SendMessageOptions.DontRequireReceiver);
         }

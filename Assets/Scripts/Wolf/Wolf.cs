@@ -9,6 +9,7 @@ namespace Wolfpack
     public sealed class Wolf : MonoBehaviour
     {
         public static Action<Wolf> Spawned;
+        public static Action<Wolf> Died;
         
         public IGlitchEffect GlitchEffect { get; private set; }
         public GlitchEffectSettings GlitchEffectSettings;
@@ -48,8 +49,8 @@ namespace Wolfpack
         {
             var existingWolves = GameManager.Instance.Wolves;
             if (existingWolves.Contains(this)) existingWolves.Remove(this);
-            ScreenFading.Instance.FadeInOut(FadeDirection.In, .1f).Run();
-            Destroy(gameObject);
+            Died?.Invoke(this);
+            Destroy(gameObject, .2f);
         }
 
         void OnTriggerEnter(Collider col)
@@ -85,6 +86,7 @@ namespace Wolfpack
             if (col is SphereCollider)
             {
                 (col.GetComponent(typeof(Obstacle)) as Obstacle)?.Destroy();
+                (GetComponentInChildren(typeof(Camera)) as Camera).transform.parent = null;
                 OnDied();
             }
         }
